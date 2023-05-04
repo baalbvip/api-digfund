@@ -2,12 +2,13 @@
 
 use Connection\DB;
 
+$APP_KEY = "APP_SECRET_Xxi6Jpl4UXzo0rFH2W9WPuNQKsruzDGa";
 
 function ExistsUser($user)
 {
-    print $user;
-    return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$user'")[0];
+    return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$user' or Num_Portafolio = '$user'")[0];
 }
+
 
 function CreateUser($params)
 {
@@ -15,22 +16,23 @@ function CreateUser($params)
     $first_name = $params['billing_first_name'];
     $last_name = $params['billing_last_name'];
     $phone = $params['billing_phone'];
+    $country = $params['billing_pais'];
     $num_port = LastNumPortafolio() + 1;
 
     try {
+
+        /*
         $id = DB::insert(
             "INSERT INTO dbo.UsuariosTmp (Nombre,Apellidos,Correo,Usuario,contrasenna,Tipo,Ind_estado,Usuario_Registro,Fecha_Registro,Num_Portafolio) 
         VALUES (?,?,?,?,?,?,?,?,?,?)",
             [$first_name, $last_name, $email, $email, "default", "E", "1", $email, date("Y-m-d"), $num_port]
-        );
+        );*/
 
-        DB::insert(
-            "INSERT INTO dbo.CLI_CUENTAS 
-            (cod_cuenta,cod_subcuenta,cod_ejecutivo,por_comision,ind_exento,ind_estado,can_dias_ley_psicotropicos,ind_forma_pago_dividendos,ind_empleado,ind_cobro_intereses,cod_tipo_instruccion,cod_tipo_cliente,ind_origen_fondo_deposito_inicial,nom_cuenta,fec_apertura) 
-        VALUES 
-        (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            [$num_port, 0, 0, 0, 'N', 'A', 0, 'T', 'N', 'S', 1, 1, 1, $first_name . " " . $last_name, date("Y-m-d h:i:s", time())]
-        );
+        $procedure = DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_CUENTA @pNombre = '$first_name', @pApellidos = '$last_name', @pCorreo = '$email',@pDireccion = '$country',@pTelefono = '$phone',@pUsuario = '$email',@pContrasenna = 'default',@pTipo = 't', @pUsuario_Registro = '" . time() . "', @pError = 'x',@nom_cuenta = 'pedrito',@fec_apertura = '" . time() . "',@cod_ejecutivo = 0, @pNum_Portafolio = '$num_port', @tipoOperacion = '1'");
+
+        if ($procedure) {
+            $id = ExistsUser($email)['Id_Usuario'];
+        }
     } catch (Exception $err) {
         NewLog($err);
     }
@@ -57,7 +59,7 @@ function CreateOrder($user, $params)
         $insert = DB::insert(
             "INSERT INTO dbo.PFI_SOLICITUD_ORDEN (cod_fondo,cod_cuenta,mon_efectivo,mon_cheques,ind_division,cod_forma_pago,cod_subcuenta,ind_pend_liquidar,num_solicitud,cod_safi,ind_estado,fec_solicitud) 
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
-            [1, $infoUser['Id_Usuario'], $params['amount'], 10, 0, 0, 0, 0, time(), 0, 0, date("Y-m-d")]
+            [1, $infoUser['Num_Portafolio'], $params['amount'], 10, 0, 0, 0, 0, time(), 0, 0, date("Y-m-d")]
         );
 
         NewLog("Se inserto una nueva orden al usuario $infoUser[Correo]");
@@ -95,4 +97,27 @@ function LastNumPortafolio()
 
 
     return $lastId;
+}
+
+function GenerateToken()
+{
+    return sha1(md5(time() * rand(0, 150) * rand(250, 500)));
+}
+
+function CheckAppKey($key)
+{
+    global $APP_KEY;
+
+    // Esto verificara si es correcta la key que se le esta pasando
+    return $APP_KEY == $key;
+}
+
+function CheckSession()
+{
+    $token = $_POST['token'];
+
+    if (!empty($token)) {
+        $result = DB::query("SELECT * FROM dbo.ksq_sessions WHERE hash = ?", [$token])[0];
+        return (int) $result['user_id'];
+    }
 }

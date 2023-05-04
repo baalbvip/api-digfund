@@ -7,8 +7,11 @@ use Class\Upload\Upload;
 require_once("./App/Class/autoload.php");
 
 
-App::Route("/api/get/test", [Get::class, "Test"]);
 
+// GET 
+App::Route("/api/get/test", [Get::class, "Test"]);
+App::Route("/api/get/token", [Get::class, "Token"]);
+App::Route("/api/get/myinfo", [Get::class, "MyInfo"]);
 
 
 

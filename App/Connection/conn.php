@@ -48,6 +48,15 @@ class DB
         return $prepare->fetchAll();
     }
 
+    public static function procedure($procedure)
+    {
+        $prepare = self::getConnection()->prepare($procedure);
+        $exec = $prepare->execute();
+
+
+        return $exec;
+    }
+
     public static function insert($query, $values)
     {
 
