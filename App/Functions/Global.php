@@ -101,7 +101,6 @@ function LastNumPortafolio()
         $lastId = $query[0]['Num_Portafolio'];
     }
 
-
     return $lastId;
 }
 
