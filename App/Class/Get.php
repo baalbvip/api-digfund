@@ -11,7 +11,7 @@ class Get
 {
     static function Test()
     {
-        return  ExistsUser("jotitowelcome@gmail.com");
+        return "ruta para testar";
     }
 
     static function MyInfo()
@@ -40,7 +40,15 @@ class Get
                 if ($infoUser) {
                     $token = GenerateToken();
 
-                  
+                    $insert = DB::insert("INSERT INTO dbo.ksq_sessions (ip,user_id,hash,time_add,time_expire) 
+                    VALUES 
+                    (?,?,?,?,?)", [$_SERVER['REMOTE_ADDR'], $infoUser['Num_Portafolio'], $token, time(), strtotime("+2 Days")]);
+
+                    if ($insert) {
+                        $status = true;
+                    } else {
+                        $token = null;
+                    }
                 }
             }
         }
