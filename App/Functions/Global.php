@@ -6,7 +6,13 @@ $APP_KEY = "APP_SECRET_Xxi6Jpl4UXzo0rFH2W9WPuNQKsruzDGa";
 
 function ExistsUser($user)
 {
-    return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$user' or Num_Portafolio = '$user'")[0];
+
+
+    if (is_numeric($user)) {
+        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$user' or Num_Portafolio = '$user'")[0];
+    } else {
+        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$user'")[0];
+    }
 }
 
 

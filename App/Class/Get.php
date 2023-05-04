@@ -11,7 +11,7 @@ class Get
 {
     static function Test()
     {
-        return DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_CUENTA @pNombre = 'Pex', @pApellidos = 'axd', @pCorreo = 'baalb',@pDireccion = 'Caracas',@pTelefono = '+584125400',@pUsuario = 'baalbx@g',@pContrasenna = 'xd',@pTipo = 't', @pUsuario_Registro = 167545645, @pError = 'x',@nom_cuenta = 'pedrito',@fec_apertura = 1656989,@cod_ejecutivo = 0, @pNum_Portafolio = '232', @tipoOperacion = '1'");
+        return  ExistsUser("jotitowelcome@gmail.com");
     }
 
     static function MyInfo()
