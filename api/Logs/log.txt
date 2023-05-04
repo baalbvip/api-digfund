@@ -1,0 +1,37 @@
+{"amount":null}
+[]
+{"amount":null}
+[]
+{"amount":null}
+[]
+PDOException: SQLSTATE[23000]: [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert the value NULL into column 'Correo', table 'DIGFUNDES.dbo.UsuariosTmp'; column does not allow nulls. INSERT fails. in D:\xampp\htdocs\api\App\Connection\conn.php:53
+Stack trace:
+#0 D:\xampp\htdocs\api\App\Connection\conn.php(53): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\api\App\Functions\Global.php(22): Connection\DB::insert('INSERT INTO dbo...', Array)
+#2 D:\xampp\htdocs\api\App\Class\Upload.php(24): CreateUser(Array)
+#3 [internal function]: Class\Upload\Upload::Order()
+#4 D:\xampp\htdocs\api\App\Class\App.php(19): call_user_func(Array)
+#5 D:\xampp\htdocs\api\routes.php(18): Class\App\App::Route('/api/upload/ord...', Array)
+#6 {main}
+Se creo el usuario 
+{"amount":null}
+[]
+Se creo el usuario 
+{"amount":null}
+[]
+Se creo el usuario 
+{"amount":null}
+[]
+Se creo el usuario 
+{"amount":null}
+[]
+Se creo el usuario 
+{"amount":null}
+[]
+Se creo el usuario 
+{"amount":null}
+[]
+Se creo el usuario 
+{"amount":null}
+[]
+Se inserto una nueva orden al usuario baalbvip@gmail.com
