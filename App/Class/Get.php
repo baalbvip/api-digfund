@@ -11,7 +11,13 @@ class Get
 {
     static function Test()
     {
-        return "ruta para testar";
+        $id = CheckSession();
+
+        if ($id) {
+            return ExistsUser($id);
+        } else {
+            return "No has iniciado session";
+        }
     }
 
     static function MyInfo()
