@@ -34,7 +34,7 @@ function CreateUser($params)
             [$first_name, $last_name, $email, $email, "default", "E", "1", $email, date("Y-m-d"), $num_port]
         );*/
 
-        $procedure = DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_CUENTA @pNombre = '$first_name', @pApellidos = '$last_name', @pCorreo = '$email',@pDireccion = '$country',@pTelefono = '$phone',@pUsuario = '$email',@pContrasenna = 'default',@pTipo = 't', @pUsuario_Registro = '" . time() . "', @pError = 'x',@nom_cuenta = 'pedrito',@fec_apertura = '" . time() . "',@cod_ejecutivo = 0, @pNum_Portafolio = '$num_port', @tipoOperacion = '1'");
+        $procedure = DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_CUENTA @pNombre = '$first_name', @pApellidos = '$last_name', @pCorreo = '$email',@pDireccion = '$country',@pTelefono = '$phone',@pUsuario = '$email',@pContrasenna = 'default',@pTipo = 't', @pUsuario_Registro = '" . DateTime() . "', @pError = 'x',@nom_cuenta = 'pedrito',@fec_apertura = '" . DateTime() . "',@cod_ejecutivo = 0, @pNum_Portafolio = '$num_port', @tipoOperacion = '1'");
 
         if ($procedure) {
             $id = ExistsUser($email)['Id_Usuario'];
@@ -125,4 +125,10 @@ function CheckSession()
         $result = DB::query("SELECT * FROM dbo.ksq_sessions WHERE hash = ?", [$token])[0];
         return (int) $result['user_id'];
     }
+}
+
+
+function DateTime()
+{
+    return date("Y-m-d h:i:s");
 }
