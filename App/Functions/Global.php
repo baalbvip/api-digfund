@@ -54,7 +54,6 @@ function NewLog($text)
     fclose($file);
 }
 
-
 function CreateOrder($user, $params)
 {
 
@@ -62,11 +61,17 @@ function CreateOrder($user, $params)
 
     if ($infoUser) {
         // Significa que este usuario existe entonces vamos a crearle la orden que requiere
-        $insert = DB::insert(
+
+
+        /*
+        $insert = DB::procedure(
             "INSERT INTO dbo.PFI_SOLICITUD_ORDEN (cod_fondo,cod_cuenta,mon_efectivo,mon_cheques,ind_division,cod_forma_pago,cod_subcuenta,ind_pend_liquidar,num_solicitud,cod_safi,ind_estado,fec_solicitud) 
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
             [1, $infoUser['Num_Portafolio'], $params['amount'], 10, 0, 0, 0, 0, time(), 0, 0, date("Y-m-d")]
-        );
+        );*/
+
+        DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_ORDEN_SOLICITUD @cod_cuenta = '" . $infoUser['Num_Portafolio'] . "', @obs_solicitud = '2', @fec_solicitud = '" . DateTime() . "', @mon_efectivo = '$params[amount]', @pError = '1'");
+
 
         NewLog("Se inserto una nueva orden al usuario $infoUser[Correo]");
     }
