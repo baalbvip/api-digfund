@@ -13,9 +13,9 @@ class Get
     {
         $id = CheckSession();
 
-        if($id){
+        if ($id) {
             return ExistsUser($id);
-        }else{
+        } else {
             return "No has iniciado session";
         }
     }
