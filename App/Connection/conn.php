@@ -54,10 +54,17 @@ class DB
         $exec = $prepare->execute();
 
         // Verificar si hay filas retornadas
-        if ($prepare->rowCount() > 0) {
-            return $prepare->fetchAll(PDO::FETCH_ASSOC);
-        } else {
-            return $exec; // O cualquier valor que desees devolver si no hay filas
+
+        try {
+
+            $rows = $prepare->fetchAll(PDO::FETCH_ASSOC);
+            if (count($rows)) {
+                return $rows;
+            } else {
+                return $exec; // O cualquier valor que desees devolver si no hay filas
+            }
+        } catch (Exception $err) {
+            return $exec;
         }
     }
 

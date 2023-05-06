@@ -69,8 +69,7 @@ class Get
         if ($session = true) {
 
             $response = DB::procedure("EXECUTE SP_WEB_Transacciones");
-
-            print_r($response);
+            return $response;
         }
     }
 }
