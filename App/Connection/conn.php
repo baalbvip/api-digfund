@@ -53,8 +53,12 @@ class DB
         $prepare = self::getConnection()->prepare($procedure);
         $exec = $prepare->execute();
 
-
-        return $exec;
+        // Verificar si hay filas retornadas
+        if ($prepare->rowCount() > 0) {
+            return $prepare->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return $exec; // O cualquier valor que desees devolver si no hay filas
+        }
     }
 
     public static function insert($query, $values)

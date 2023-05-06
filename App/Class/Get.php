@@ -3,9 +3,7 @@
 namespace Class\Get;
 
 use Connection\DB;
-
-
-
+use PDO;
 
 class Get
 {
@@ -61,5 +59,18 @@ class Get
 
 
         return ['status' => $status, 'token' => $token];
+    }
+
+
+    static function Consolidated()
+    {
+        $session = CheckSession();
+
+        if ($session = true) {
+
+            $response = DB::procedure("EXECUTE SP_WEB_Transacciones");
+
+            print_r($response);
+        }
     }
 }

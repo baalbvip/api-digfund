@@ -12,6 +12,7 @@ require_once("./App/Class/autoload.php");
 App::Route("/api/get/test", [Get::class, "Test"]);
 App::Route("/api/get/token", [Get::class, "Token"]);
 App::Route("/api/get/myinfo", [Get::class, "MyInfo"]);
+App::Route("/api/get/consolidated", [Get::class, "Consolidated"]);
 
 
 
