@@ -75,6 +75,12 @@ class Get
 
     static function DetailOrder()
     {
-        return DB::procedure('EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = "N.O. 258" , @cod_cuenta = 3');
+        $code = $_POST['code'];
+
+        $session = CheckSession();
+
+        if ($session) {
+            return DB::procedure('EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = ' . $code . ' , @cod_cuenta = 3');
+        }
     }
 }
