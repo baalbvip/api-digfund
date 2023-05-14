@@ -68,7 +68,11 @@ class Get
 
         if ($session) {
             $infoUser = ExistsUser($session);
-            $response = DB::procedure("EXECUTE dbo.SP_WEB_TransaccionesDIG @Portafolio = 3");
+
+            print_r($session);
+
+            print_r($infoUser);
+            $response = DB::procedure("EXECUTE dbo.SP_WEB_TransaccionesDIG @Portafolio = " . $infoUser['Num_Portafolio'] . "");
             return $response;
         }
     }
