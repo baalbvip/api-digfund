@@ -52,21 +52,26 @@ class DB
     {
         $prepare = self::getConnection()->prepare($procedure);
         $exec = $prepare->execute();
-
+    
         // Verificar si hay filas retornadas
-
+    
         try {
-
-            $rows = $prepare->fetchAll(PDO::FETCH_ASSOC);
-            if (count($rows)) {
-                return $rows;
-            } else {
-                return $exec; // O cualquier valor que desees devolver si no hay filas
-            }
+    
+            $result = array(); // arreglo para almacenar todos los resultados
+    
+            do {
+                $rows = $prepare->fetchAll(PDO::FETCH_ASSOC);
+                if (count($rows)) {
+                    $result[] = $rows; // agregar los resultados al arreglo
+                }
+            } while ($prepare->nextRowset()); // recorrer todas las tablas
+    
+            return $result;
         } catch (Exception $err) {
             return $exec;
         }
     }
+    
 
     public static function insert($query, $values)
     {
