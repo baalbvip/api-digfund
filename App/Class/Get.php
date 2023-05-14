@@ -82,7 +82,7 @@ class Get
         $session = CheckSession();
 
         if ($session) {
-            return DB::procedure('EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = ' . $code . ' , @cod_cuenta = 3');
+            return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = $code , @cod_cuenta = 3");
         }
     }
 }
