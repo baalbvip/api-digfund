@@ -66,8 +66,7 @@ class Get
     {
         $session = CheckSession();
 
-        if ($session = true) {
-
+        if ($session) {
             $response = DB::procedure("EXECUTE SP_WEB_Transacciones");
             return $response;
         }
