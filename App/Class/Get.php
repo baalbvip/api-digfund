@@ -75,11 +75,11 @@ class Get
 
     static function DetailOrder()
     {
-        $code = $_GET['code'];
+        $code = urldecode($_GET['code']);
 
         $session = CheckSession();
         if ($session) {
-            return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = $code , @cod_cuenta = 3");
+            return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = '$code' , @cod_cuenta = 3");
         }
     }
 }
