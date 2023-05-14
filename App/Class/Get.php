@@ -82,7 +82,7 @@ class Get
         if ($session) {
 
             try {
-                return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = '$code' , @cod_cuenta = 3");
+                return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = 'N.O. 258' , @cod_cuenta = 3");
 
             } catch (Exception $err) {
                 print_r($err);
