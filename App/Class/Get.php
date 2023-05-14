@@ -77,6 +77,8 @@ class Get
     {
         $code = $_POST['code'];
 
+        NewLog($code);
+
         $session = CheckSession();
 
         if ($session) {
