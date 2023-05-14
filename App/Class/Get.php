@@ -64,11 +64,7 @@ class Get
 
     static function Consolidated()
     {
-        $session = CheckSession();
-
-        if ($session) {
-            $response = DB::procedure("EXECUTE SP_WEB_Transacciones");
-            return $response;
-        }
+        $response = DB::procedure("EXECUTE SP_WEB_Transacciones");
+        return $response;
     }
 }
