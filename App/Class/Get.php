@@ -80,7 +80,7 @@ class Get
         NewLog($code);
 
         $session = CheckSession();
-
+        NewLog($session);
         if ($session) {
             return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = $code , @cod_cuenta = 3");
         }
