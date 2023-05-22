@@ -10,13 +10,6 @@ class Get
 {
     static function Test()
     {
-        $id = CheckSession();
-
-        if ($id) {
-            return ExistsUser($id);
-        } else {
-            return "No has iniciado session";
-        }
     }
 
     static function MyInfo()
@@ -85,5 +78,68 @@ class Get
             NewLog($code);
             return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = '$code' , @cod_cuenta = '$session'");
         }
+    }
+
+
+    static function StatusAccount()
+    {
+
+        $tipo = 'ED_';
+        $mes = '12';
+        $anio = '2022';
+        $portafolio = '00364';
+
+        // Configuración de conexión FTP
+        $ftpServer = 'achieveprocessingcenter.com';
+        $ftpUsername = 'integracion';
+        $ftpPassword = 'Yky$4m485D1ms4#';
+        $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
+
+        // Establecer conexión FTP
+        $conn = ftp_connect($ftpServer);
+        if (!$conn) {
+            die("No se pudo conectar al servidor FTP");
+        }
+
+        // Iniciar sesión FTP
+        if (!ftp_login($conn, $ftpUsername, $ftpPassword)) {
+            die("Error de inicio de sesión FTP");
+        }
+
+
+        // Obtener lista de archivos en el directorio remoto
+        $fileList = ftp_nlist($conn, ".");
+        if (!$fileList) {
+            die("No se pudo obtener la lista de archivos");
+        }
+
+        $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
+
+        // Filtrar y mostrar archivos como hipervínculos
+        foreach ($fileList as $file) {
+            $fileName = basename($file);
+            $archivoTipo = substr($fileName, 0, 3);
+            $archivoMes = substr($fileName, 5, 2);
+            $archivoAnio = substr($fileName, 7, 4);
+            $archivoPortafolio = substr($fileName, 16, 5);
+
+            // Filtrar archivos basado en las variables
+            if (
+                $archivoTipo === $tipo &&
+                $archivoAnio === $anio &&
+                $archivoPortafolio === $portafolio
+            ) {
+
+
+                $urlArchivo = $remoteDirectory . $fileName;
+
+                $months[$archivoMes][] = ['url_download' => $urlArchivo];
+            }
+        }
+
+        // Cerrar conexión FTP
+        ftp_close($conn);
+
+        return $months;
     }
 }
