@@ -85,14 +85,14 @@ class Get
     {
 
         $tipo = 'ED_';
-        $mes = '12';
-        $anio = '2022';
+        $mes = '0';
+        $anio = $_POST['year'];
         $portafolio = '00364';
 
         // Configuración de conexión FTP
         $ftpServer = 'achieveprocessingcenter.com';
-        $ftpUsername = 'integracion';
-        $ftpPassword = 'Yky$4m485D1ms4#';
+        $ftpUsername = 'integraciondig';
+        $ftpPassword = '9ov%1y72DIG#';
         $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
         // Establecer conexión FTP
@@ -106,14 +106,14 @@ class Get
             die("Error de inicio de sesión FTP");
         }
 
-        try{
+        try {
             $fileList = ftp_nlist($conn, ".");
             if (!$fileList) {
                 die("No se pudo obtener la lista de archivos");
             }
-    
+
             $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
-    
+
             // Filtrar y mostrar archivos como hipervínculos
             foreach ($fileList as $file) {
                 $fileName = basename($file);
@@ -121,26 +121,25 @@ class Get
                 $archivoMes = substr($fileName, 5, 2);
                 $archivoAnio = substr($fileName, 7, 4);
                 $archivoPortafolio = substr($fileName, 16, 5);
-    
                 // Filtrar archivos basado en las variables
                 if (
                     $archivoTipo === $tipo &&
                     $archivoAnio === $anio &&
                     $archivoPortafolio === $portafolio
                 ) {
-    
-    
+
+
                     $urlArchivo = $remoteDirectory . $fileName;
-    
+
                     $months[$archivoMes][] = ['url_download' => $urlArchivo];
                 }
             }
-        }catch(Exception $err){
+        } catch (Exception $err) {
             print_r($err);
         }
 
         // Obtener lista de archivos en el directorio remoto
-       
+
 
         // Cerrar conexión FTP
         ftp_close($conn);
