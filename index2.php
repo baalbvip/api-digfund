@@ -24,8 +24,8 @@ foreach ($arr as $file) {
     $str = "";
     $pos = strpos($file, "EC_") .  $str = "EC_";
 
-    if (!isset($pos)) {
-        print "fpapi";
+    if ($pos) {
+        print_r($pos);
     }
 
     if ($pos !== false) {
