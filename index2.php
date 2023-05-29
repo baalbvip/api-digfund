@@ -33,5 +33,5 @@ foreach ($arr as $file) {
     $urlArchivo = $remoteDirectory . $fileName;
 
     // Mostrar el nombre del archivo como hipervínculo
-    print_r($file);
+    echo '<a href="' . $urlArchivo . '" target="_blank">' . $fileName . '</a><br>';
 }
