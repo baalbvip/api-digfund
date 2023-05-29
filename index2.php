@@ -9,7 +9,7 @@ $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 $command = "ftp -n $ftpServer <<END_SCRIPT
 quote USER $ftpUsername
 quote PASS $ftpPassword
-ls
+ls -p
 quit
 END_SCRIPT";
 
