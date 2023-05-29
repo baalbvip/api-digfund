@@ -23,5 +23,5 @@ $arr = explode("\n", $output);
 foreach ($arr as $file) {
     $file = substr($file, 20);
 
-    
+    print_r($file);
 }
