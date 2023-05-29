@@ -22,8 +22,9 @@ $arr = explode("\n", $output);
 
 foreach ($arr as $file) {
     $file = substr($file, 20);
-    $filename = explode("ED_",$file);
-
-    print_r($filename);
-    
+    $pos = strpos($file, "EC_");  // Obtener la posición de la primera aparición de "EC_"
+    if ($pos !== false) {
+        $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+        echo $filename . "\n";
+    }
 }
