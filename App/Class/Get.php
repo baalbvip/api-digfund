@@ -61,10 +61,9 @@ class Get
             print_r($e);
         }
 
-        print_r($months);
 
 
-        return "okkkkk";
+        return json_encode($months);
     }
 
     static function MyInfo()
