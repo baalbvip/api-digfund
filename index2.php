@@ -22,6 +22,9 @@ $arr = explode("\n", $output);
 
 foreach ($arr as $file) {
     $file = substr($file, 20);
+    $file = explode(" ", $file);
+    $file = $file[1];
+
     $fileName = basename($file);
     $archivoTipo = substr($fileName, 0, 3);
     $archivoMes = substr($fileName, 5, 2);
