@@ -7,8 +7,8 @@ $portafolio = '00364';
 
 // Configuración de conexión FTP
 $ftpServer = 'achieveprocessingcenter.com';
-$ftpUsername = 'integracion';
-$ftpPassword = 'Yky$4m485D1ms4#';
+$ftpUsername = 'integraciondig';
+$ftpPassword = '9ov%1y72DIG#';
 $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
 // Establecer conexión FTP

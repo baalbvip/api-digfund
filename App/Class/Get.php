@@ -10,6 +10,7 @@ class Get
 {
     static function Test()
     {
+        return DB::query("SELECT * FROM dbo.UsuariosTmp");
     }
 
     static function MyInfo()
