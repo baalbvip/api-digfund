@@ -15,5 +15,6 @@ END_SCRIPT";
 $output = shell_exec($command);
 
 // Imprimir la salida
-echo $output;
-?>
+$arr = explode("\n",$output);
+
+print_r($arr);
