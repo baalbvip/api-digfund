@@ -3,12 +3,6 @@ $ftpServer = 'achieveprocessingcenter.com';
 $ftpUsername = 'integraciondig';
 $ftpPassword = '9ov%1y72DIG#';
 
-
-$tipo = 'ED_';
-$mes = '12';
-$anio = '2022';
-$portafolio = '00364';
-
 // Comando FTP para obtener la lista de archivos
 $command = "ftp -n $ftpServer <<END_SCRIPT
 quote USER $ftpUsername
@@ -32,17 +26,10 @@ foreach ($arr as $file) {
     $archivoPortafolio = substr($fileName, 16, 5);
 
     // Filtrar archivos basado en las variables
-    if (
-        $archivoTipo === $tipo &&
-        $archivoMes === $mes &&
-        $archivoAnio === $anio &&
-        $archivoPortafolio === $portafolio
-    ) {
 
-        // Generar URL del archivo FTP
-        $urlArchivo = $remoteDirectory . $fileName;
+    // Generar URL del archivo FTP
+    $urlArchivo = $remoteDirectory . $fileName;
 
-        // Mostrar el nombre del archivo como hipervínculo
-        echo '<a href="' . $urlArchivo . '" target="_blank">' . $fileName . '</a><br>';
-    }
+    // Mostrar el nombre del archivo como hipervínculo
+    echo '<a href="' . $urlArchivo . '" target="_blank">' . $fileName . '</a><br>';
 }
