@@ -22,7 +22,7 @@ $arr = explode("\n", $output);
 
 foreach ($arr as $file) {
     $str = "";
-    $pos = strpos($file, "EC_") .  $str = "EC_";  
+    $pos = strpos($file, "ED_") .  $str = "ED_";  
 
   
     $pos == 0 ?  $pos = strpos($file, "ED_") . $str = "ED_" : '';
