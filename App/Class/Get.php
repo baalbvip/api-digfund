@@ -61,8 +61,10 @@ class Get
             print_r($e);
         }
 
+        print_r($months);
 
-        return $months;
+
+        return "okkkkk";
     }
 
     static function MyInfo()
