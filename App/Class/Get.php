@@ -10,53 +10,58 @@ class Get
 {
     static function Test()
     {
-        $ftpServer = 'achieveprocessingcenter.com';
-        $ftpUsername = 'integraciondig';
-        $ftpPassword = '9ov%1y72DIG#';
 
-        $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
+        try {
+            $ftpServer = 'achieveprocessingcenter.com';
+            $ftpUsername = 'integraciondig';
+            $ftpPassword = '9ov%1y72DIG#';
 
-        $year = "2021";
+            $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
-        // Comando FTP para obtener la lista de archivos
-        $command = "ftp -n $ftpServer <<END_SCRIPT
-        quote USER $ftpUsername
-        quote PASS $ftpPassword
-        ls -p
-        quit
-        END_SCRIPT";
+            $year = "2021";
 
-        // Ejecutar el comando y capturar la salida
-        $output = shell_exec($command);
+            // Comando FTP para obtener la lista de archivos
+            $command = "ftp -n $ftpServer <<END_SCRIPT
+            quote USER $ftpUsername
+            quote PASS $ftpPassword
+            ls -p
+            quit
+            END_SCRIPT";
 
-        // Imprimir la salida
-        $arr = explode("\n", $output);
+            // Ejecutar el comando y capturar la salida
+            $output = shell_exec($command);
 
-        $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
+            // Imprimir la salida
+            $arr = explode("\n", $output);
+
+            $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
 
 
-        foreach ($arr as $file) {
-            $str = "ED_";
-            $pos = strpos($file, "ED_");
+            foreach ($arr as $file) {
+                $str = "ED_";
+                $pos = strpos($file, "ED_");
 
-            if ($pos !== false) {
-                $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                $filename = $str . $filename;
-                $fileName = basename($filename);
-                $archivoTipo = substr($fileName, 0, 3);
-                $archivoMes = substr($fileName, 5, 2);
-                $archivoAnio = substr($fileName, 7, 4);
-                $archivoPortafolio = substr($fileName, 16, 5);
+                if ($pos !== false) {
+                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                    $filename = $str . $filename;
+                    $fileName = basename($filename);
+                    $archivoTipo = substr($fileName, 0, 3);
+                    $archivoMes = substr($fileName, 5, 2);
+                    $archivoAnio = substr($fileName, 7, 4);
+                    $archivoPortafolio = substr($fileName, 16, 5);
 
-                if ($archivoAnio == $year) {
-                    $urlArchivo = $remoteDirectory . $fileName;
-                    $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                    if ($archivoAnio == $year) {
+                        $urlArchivo = $remoteDirectory . $fileName;
+                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                    }
                 }
             }
+        } catch (Exception $e) {
+            print_r($e);
         }
 
-        print "ok";
-        return $months;
+
+        return "xd";
     }
 
     static function MyInfo()
