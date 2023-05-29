@@ -61,7 +61,7 @@ class Get
             print_r($e);
         }
 
-
+        print_r($months);
 
         print json_encode($months,true);
     }
