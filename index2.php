@@ -3,6 +3,8 @@ $ftpServer = 'achieveprocessingcenter.com';
 $ftpUsername = 'integraciondig';
 $ftpPassword = '9ov%1y72DIG#';
 
+$remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
+
 // Comando FTP para obtener la lista de archivos
 $command = "ftp -n $ftpServer <<END_SCRIPT
 quote USER $ftpUsername
