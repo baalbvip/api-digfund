@@ -22,6 +22,8 @@ $arr = explode("\n", $output);
 
 foreach ($arr as $file) {
     $file = substr($file, 20);
+    $filename = explode("ED_",$file);
 
-    print_r($file);
+    print_r($filename)
+    
 }
