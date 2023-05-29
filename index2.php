@@ -21,16 +21,5 @@ $arr = explode("\n", $output);
 
 
 foreach ($arr as $file) {
-    $str = "";
-    $pos = strpos($file, "EC_") .  $str = "EC_";
-
-
-    if (!$pos) {
-        print "fpapi";
-    }
-
-    if ($pos !== false) {
-        $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-        echo $str . $filename . "\n";
-    }
+    print $file;
 }
