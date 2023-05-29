@@ -95,11 +95,11 @@ class Get
 
         // Comando FTP para obtener la lista de archivos
         $command = "ftp -n $ftpServer <<END_SCRIPT
-quote USER $ftpUsername
-quote PASS $ftpPassword
-ls -p
-quit
-END_SCRIPT";
+        quote USER $ftpUsername
+        quote PASS $ftpPassword
+        ls -p
+        quit
+        END_SCRIPT";
 
         // Ejecutar el comando y capturar la salida
         $output = shell_exec($command);
