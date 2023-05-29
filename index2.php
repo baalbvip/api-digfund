@@ -22,11 +22,10 @@ $arr = explode("\n", $output);
 
 foreach ($arr as $file) {
     $str = "";
-    $pos = strpos($file, "EC_") .  $str = "EC_";
+    $pos = strpos($file, "EC_") .  $str = "EC_";  
 
-    if ($pos) {
-        print_r($pos);
-    }
+  
+    $pos == 0 ?  $pos = strpos($file, "ED_") . $str = "ED_" : '';
 
     if ($pos !== false) {
         $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
