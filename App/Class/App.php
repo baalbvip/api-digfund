@@ -16,6 +16,17 @@ class App
 
             header("Content-type: application/json");
 
+
+            // Permitir peticiones desde cualquier origen
+            header("Access-Control-Allow-Origin: *");
+
+            // Permitir métodos de solicitud específicos
+            header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+
+            // Permitir encabezados específicos
+            header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
+
             print json_encode(call_user_func(array($class, $functions[1])));
         }
     }
