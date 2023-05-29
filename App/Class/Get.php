@@ -85,65 +85,50 @@ class Get
     static function StatusAccount()
     {
 
-        $tipo = 'ED_';
-        $mes = '0';
-        $anio = $_POST['year'];
-        $portafolio = '00364';
-
-        // Configuración de conexión FTP
         $ftpServer = 'achieveprocessingcenter.com';
         $ftpUsername = 'integraciondig';
         $ftpPassword = '9ov%1y72DIG#';
+
         $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
-        // Establecer conexión FTP
-        $conn = ftp_connect($ftpServer);
-        if (!$conn) {
-            die("No se pudo conectar al servidor FTP");
-        }
+        $year = "2021";
 
-        // Iniciar sesión FTP
-        if (!ftp_login($conn, $ftpUsername, $ftpPassword)) {
-            die("Error de inicio de sesión FTP");
-        }
+        // Comando FTP para obtener la lista de archivos
+        $command = "ftp -n $ftpServer <<END_SCRIPT
+quote USER $ftpUsername
+quote PASS $ftpPassword
+ls -p
+quit
+END_SCRIPT";
 
-        try {
-            $fileList = ftp_nlist($conn, ".");
-            if (!$fileList) {
-                die("No se pudo obtener la lista de archivos");
-            }
+        // Ejecutar el comando y capturar la salida
+        $output = shell_exec($command);
 
-            $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
+        // Imprimir la salida
+        $arr = explode("\n", $output);
 
-            // Filtrar y mostrar archivos como hipervínculos
-            foreach ($fileList as $file) {
-                $fileName = basename($file);
+        $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
+
+
+        foreach ($arr as $file) {
+            $str = "ED_";
+            $pos = strpos($file, "ED_");
+
+            if ($pos !== false) {
+                $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                $filename = $str . $filename;
+                $fileName = basename($filename);
                 $archivoTipo = substr($fileName, 0, 3);
                 $archivoMes = substr($fileName, 5, 2);
                 $archivoAnio = substr($fileName, 7, 4);
                 $archivoPortafolio = substr($fileName, 16, 5);
-                // Filtrar archivos basado en las variables
-                if (
-                    $archivoTipo === $tipo &&
-                    $archivoAnio === $anio &&
-                    $archivoPortafolio === $portafolio
-                ) {
 
-
+                if ($archivoAnio == $year) {
                     $urlArchivo = $remoteDirectory . $fileName;
-
                     $months[$archivoMes][] = ['url_download' => $urlArchivo];
                 }
             }
-        } catch (Exception $err) {
-            print_r($err);
         }
-
-        // Obtener lista de archivos en el directorio remoto
-
-
-        // Cerrar conexión FTP
-        ftp_close($conn);
 
         return $months;
     }
