@@ -63,7 +63,7 @@ class Get
 
 
 
-        print json_encode($months);
+        print json_encode($months,true);
     }
 
     static function MyInfo()
