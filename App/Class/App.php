@@ -10,8 +10,7 @@ class App
 {
     static function Route($route, $functions)
     {
-        if ($_SERVER['REQUEST_URI'] == $route) {
-
+        if (explode("?", $_SERVER['REQUEST_URI'])[0] == $route) {
             $class = new $functions[0]();
 
             header("Content-type: application/json");

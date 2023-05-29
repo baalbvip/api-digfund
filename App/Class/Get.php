@@ -145,8 +145,8 @@ class Get
 
             $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
-            $year = empty($_POST['year']) == true ? $year = 2021 : $_POST['year'];
-            
+            $year = empty($_GET['year']) == true ? $year = date("Y") : $_GET['year'];
+
 
             // Comando FTP para obtener la lista de archivos
             $command = "ftp -n $ftpServer <<END_SCRIPT
