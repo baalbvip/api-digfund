@@ -13,29 +13,20 @@ ls -p
 quit
 END_SCRIPT";
 
-// Ejecutar el comando y capturar la salida
-$output = shell_exec($command);
 
-// Imprimir la salida
-$arr = explode("\n", $output);
+// Procesar la salida para obtener solo los nombres de archivo
+$files = [];
+$lines = explode("\n", $output);
+foreach ($lines as $line) {
+    if (!empty($line)) {
+        // Eliminar la fecha y el tamaño usando awk y sed
+        $file = trim(shell_exec("echo '$line' | awk '{$1=$2=$3=\"\"; print}' | sed 's/^[[:space:]]*//'"));
+        
+        $files[] = $file;
+    }
+}
 
-
-foreach ($arr as $file) {
-    $file = substr($file, 20);
-    $file = explode(" ", $file);
-    $file = $file[14];
-
-    $fileName = basename($file);
-    $archivoTipo = substr($fileName, 0, 3);
-    $archivoMes = substr($fileName, 5, 2);
-    $archivoAnio = substr($fileName, 7, 4);
-    $archivoPortafolio = substr($fileName, 16, 5);
-
-    // Filtrar archivos basado en las variables
-
-    // Generar URL del archivo FTP
-    $urlArchivo = $remoteDirectory . $fileName;
-
-    // Mostrar el nombre del archivo como hipervínculo
-    echo '<a href="' . $urlArchivo . '" target="_blank">' . $fileName . '</a><br>';
+// Imprimir la lista de nombres de archivo
+foreach ($files as $file) {
+    echo $file . "\n";
 }
