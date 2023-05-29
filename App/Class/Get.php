@@ -55,6 +55,7 @@ class Get
             }
         }
 
+        print "ok";
         return $months;
     }
 
