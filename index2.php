@@ -26,7 +26,7 @@ foreach ($arr as $file) {
 
 
     if (!$pos) {
-        print "f";
+        print "fpapi";
     }
 
     if ($pos !== false) {
