@@ -177,7 +177,7 @@ class Get
                     $archivoAnio = substr($fileName, 7, 4);
                     $archivoPortafolio = substr($fileName, 16, 5);
 
-                    if ($archivoAnio == $year && $archivoPortafolio == "00364") {
+                    if ($archivoAnio == $year && $archivoPortafolio == "003642322") {
                         $urlArchivo = $remoteDirectory . $fileName;
                         $months[$archivoMes][] = ['url_download' => $urlArchivo];
                     }
