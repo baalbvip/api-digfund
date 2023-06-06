@@ -146,42 +146,48 @@ class Get
 
             $year = empty($_GET['year']) == true ? $year = date("Y") : $_GET['year'];
 
+            $session = CheckSession();
 
-            // Comando FTP para obtener la lista de archivos
-            $command = "ftp -n $ftpServer <<END_SCRIPT
-            quote USER $ftpUsername
-            quote PASS $ftpPassword
-            ls -p
-            quit
-            END_SCRIPT";
+            if ($session) {
+                $command = "ftp -n $ftpServer <<END_SCRIPT
+                quote USER $ftpUsername
+                quote PASS $ftpPassword
+                ls -p
+                quit
+                END_SCRIPT";
 
-            // Ejecutar el comando y capturar la salida
-            $output = shell_exec($command);
+                // Ejecutar el comando y capturar la salida
+                $output = shell_exec($command);
 
-            // Imprimir la salida
-            $arr = explode("\n", $output);
+                // Imprimir la salida
+                $arr = explode("\n", $output);
 
 
 
-            foreach ($arr as $file) {
-                $str = "ED_";
-                $pos = strpos($file, "ED_");
+                foreach ($arr as $file) {
+                    $str = "ED_";
+                    $pos = strpos($file, "ED_");
 
-                if ($pos !== false) {
-                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                    $filename = $str . $filename;
-                    $fileName = basename($filename);
-                    $archivoTipo = substr($fileName, 0, 3);
-                    $archivoMes = substr($fileName, 5, 2);
-                    $archivoAnio = substr($fileName, 7, 4);
-                    $archivoPortafolio = substr($fileName, 16, 5);
+                    if ($pos !== false) {
+                        $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                        $filename = $str . $filename;
+                        $fileName = basename($filename);
+                        $archivoTipo = substr($fileName, 0, 3);
+                        $archivoMes = substr($fileName, 5, 2);
+                        $archivoAnio = substr($fileName, 7, 4);
+                        $archivoPortafolio = substr($fileName, 16, 5);
 
-                    if ($archivoAnio == $year && $archivoPortafolio == "00188") {
-                        $urlArchivo = $remoteDirectory . $fileName;
-                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                        if ($archivoAnio == $year && $archivoPortafolio == "00188") {
+                            $urlArchivo = $remoteDirectory . $fileName;
+                            $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                        }
                     }
                 }
+            } else {
+                print "no session";
             }
+            // Comando FTP para obtener la lista de archivos
+
         } catch (Exception $e) {
             print_r($e);
         }
