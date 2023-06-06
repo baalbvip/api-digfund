@@ -64,7 +64,6 @@ class Get
 
         return $months;
     }
-
     static function MyInfo()
     {
         $session = CheckSession();
