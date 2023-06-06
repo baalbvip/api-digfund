@@ -124,8 +124,8 @@ class Get
         $code = urldecode($_POST['code']);
 
         $session = CheckSession();
-        if ($session) {
 
+        if ($session) {
             NewLog($session);
             NewLog($code);
             return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = '$code' , @cod_cuenta = '$session'");
@@ -149,6 +149,8 @@ class Get
             $session = CheckSession();
 
             if ($session) {
+                $infoUser = ExistsUser($session);
+
                 $command = "ftp -n $ftpServer <<END_SCRIPT
                 quote USER $ftpUsername
                 quote PASS $ftpPassword
@@ -176,8 +178,10 @@ class Get
                         $archivoMes = substr($fileName, 5, 2);
                         $archivoAnio = substr($fileName, 7, 4);
                         $archivoPortafolio = substr($fileName, 16, 5);
+                        $paddedNumPortafolio = str_pad($infoUser['Num_Portafolio'], 5, '0', STR_PAD_LEFT);
 
-                        if ($archivoAnio == $year && $archivoPortafolio == "00188") {
+
+                        if ($archivoAnio == $year && $archivoPortafolio == $paddedNumPortafolio) {
                             $urlArchivo = $remoteDirectory . $fileName;
                             $months[$archivoMes][] = ['url_download' => $urlArchivo];
                         }
