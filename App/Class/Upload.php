@@ -17,16 +17,9 @@ class Upload
 
         if (!ExistsUser($params['billing_email'])) {
             $idUser = CreateUser($params);
-            NewLog("SE CREO EL USUARIO ID:" + $idUser);
 
-
-            NewLog("Se esta creando la orden para el usuario ID:" + $idUser);
             // Si recibes un ID USER, significa que entonces si se registro el usuario entonces creale la orden con su ID asociada.
-            
-
-            sleep(3);
             CreateOrder($params['billing_email'], $params);
-
 
             NewLog("Se creo el usuario $params[billing_email]");
         } else {
