@@ -176,7 +176,7 @@ class Get
                         $archivoMes = substr($fileName, 5, 2);
                         $archivoAnio = substr($fileName, 7, 4);
                         $archivoPortafolio = substr($fileName, 16, 5);
-                        $paddedNumPortafolio = str_pad("00" . $infoUser['Num_Portafolio'], 5, '0', STR_PAD_LEFT);
+                        $paddedNumPortafolio = "00188";
 
 
                         if ($archivoAnio == $year && $archivoPortafolio == $paddedNumPortafolio) {
