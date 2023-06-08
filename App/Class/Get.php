@@ -126,8 +126,6 @@ class Get
         $session = CheckSession();
 
         if ($session) {
-            NewLog($session);
-            NewLog($code);
             return DB::procedure("EXECUTE dbo.SP_POR_Detalle_Inversiones @serie = '$code' , @cod_cuenta = '$session'");
         }
     }
