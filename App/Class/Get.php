@@ -159,6 +159,8 @@ class Get
                 // Ejecutar el comando y capturar la salida
                 $output = shell_exec($command);
 
+                print_r($output);
+
                 // Imprimir la salida
                 $arr = explode("\n", $output);
 
@@ -186,10 +188,6 @@ class Get
                     }
                 }*/
 
-
-                for ($i = 0; $i < 3; $i++) {
-                    print_r($arr[$i]);
-                }
             } else {
                 print "no session";
             }
