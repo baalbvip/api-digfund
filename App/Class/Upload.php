@@ -26,8 +26,6 @@ class Upload
             CreateOrder($params['billing_email'], $params);
         }
 
-
-        NewLog(json_encode(OrderData($ind, 'get')));
         NewLog(json_encode($_POST));
     }
 
