@@ -12,18 +12,13 @@ class Upload
         // esta funcion sera la encargada de subir el usuario y la orden
         // el usuario se subira en caso de que se detecte que no se ha creado
 
-        $params = $_POST['cart'];
-        $auth = $_POST['token'];
-        $ind = $_POST['ind'];
+        $params = $_POST;
 
-        $getOrder = OrderData($ind, "get");
-        $params['amount'] = $getOrder->amount;
-        OrderData($ind, 'insert', $params);
 
         if (!ExistsUser($params['billing_email'])) {
             $idUser = CreateUser($params);
             NewLog("SE CREO EL USUARIO ID:" + $idUser);
-            
+
             if ($idUser) {
                 NewLog("Se esta creando la orden para el usuario ID:" + $idUser);
                 // Si recibes un ID USER, significa que entonces si se registro el usuario entonces creale la orden con su ID asociada.

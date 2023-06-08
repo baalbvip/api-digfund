@@ -22,7 +22,7 @@ function CreateUser($params)
     $first_name = $params['billing_first_name'];
     $last_name = $params['billing_last_name'];
     $phone = $params['billing_phone'];
-    $country = $params['billing_pais'];
+    $country = $params['billing_country'];
     $num_port = LastNumPortafolio() + 1;
 
     try {
