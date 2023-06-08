@@ -178,9 +178,8 @@ class Get
                         $archivoPortafolio = substr($fileName, 16, 5);
                         $paddedNumPortafolio = "00188";
 
-                        print_r($file);
 
-                        if ($archivoAnio == $year && $archivoPortafolio == $paddedNumPortafolio) {
+                        if ($archivoAnio == $year ) {
                             $urlArchivo = $remoteDirectory . $fileName;
                             $months[$archivoMes][] = ['url_download' => $urlArchivo];
                         }
