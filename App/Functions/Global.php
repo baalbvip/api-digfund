@@ -67,7 +67,7 @@ function CreateOrder($user, $params)
             [1, $infoUser['Num_Portafolio'], $params['amount'], 10, 0, 0, 0, 0, time(), 0, 0, date("Y-m-d")]
         );*/
 
-        DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_ORDEN_SOLICITUD @cod_cuenta = '" . $infoUser['Num_Portafolio'] . "', @obs_solicitud = '2', @fec_solicitud = '" . DateTime() . "', @mon_efectivo = '$params[amount]', @pError = '1'");
+        DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_ORDEN_SOLICITUD @cod_cuenta = '" . $infoUser['Num_Portafolio'] . "', @obs_solicitud = '" . $params['order_id'] . "', @fec_solicitud = '" . DateTime() . "', @mon_efectivo = '$params[amount]', @pError = '1'");
 
 
         NewLog("Se inserto una nueva orden al usuario $infoUser[Correo]");
