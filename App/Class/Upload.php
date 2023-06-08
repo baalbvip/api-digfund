@@ -22,6 +22,9 @@ class Upload
 
             NewLog("Se esta creando la orden para el usuario ID:" + $idUser);
             // Si recibes un ID USER, significa que entonces si se registro el usuario entonces creale la orden con su ID asociada.
+            
+
+            sleep(3);
             CreateOrder($params['billing_email'], $params);
 
 
