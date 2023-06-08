@@ -162,7 +162,7 @@ class Get
                 // Imprimir la salida
                 $arr = explode("\n", $output);
 
-
+                /*
 
                 foreach ($arr as $file) {
                     $str = "ED_";
@@ -176,15 +176,19 @@ class Get
                         $archivoMes = substr($fileName, 5, 2);
                         $archivoAnio = substr($fileName, 7, 4);
                         $archivoPortafolio = substr($fileName, 16, 5);
-                        $paddedNumPortafolio = "00188";
+                        $paddedNumPortafolio = str_pad($infoUser['Num_Portafolio'], 5, '0', STR_PAD_LEFT);
 
 
-
-                        if ($archivoPortafolio == $paddedNumPortafolio) {
+                        if ($archivoAnio == $year && $archivoPortafolio == $paddedNumPortafolio) {
                             $urlArchivo = $remoteDirectory . $fileName;
                             $months[$archivoMes][] = ['url_download' => $urlArchivo];
                         }
                     }
+                }*/
+
+
+                for ($i = 0; $i < 3; $i++) {
+                    print_r($arr[$i]);
                 }
             } else {
                 print "no session";
