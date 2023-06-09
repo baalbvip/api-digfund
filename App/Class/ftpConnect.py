@@ -19,7 +19,6 @@ for file in files:
     decoded_files.append(decoded_file)
 
 # Imprimir la lista de archivos
-print("Lista de archivos:")
 for file in decoded_files:
     print(file)
 
