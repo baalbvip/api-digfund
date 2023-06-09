@@ -10,51 +10,49 @@ class Get
 {
     static function Test()
     {
-        $months = "xd";
+        $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
 
-        $command = "python3 ./ftpConnect.py";
-        $output = shell_exec($command);
+        try {
 
-        $arr = explode("\n", $output);
 
-        $ftpServer = 'achieveprocessingcenter.com';
-        $ftpUsername = 'integraciondig';
-        $ftpPassword = '9ov%1y72DIG#';
 
-        $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
-        $year = "2021";
+            // Ejecutar el comando y capturar la salida
+            $output = shell_exec("python3 ./ftpConnect.py");
 
-        $files = [];
+            print_r($output);
 
-        foreach ($arr as $file) {
-            $str = "ED_";
-            $pos = strpos($file, "ED_");
+            // Imprimir la salida
+            $arr = explode("\n", $output);
 
-            if ($pos !== false) {
-                $filename = substr($file, $pos + 3);
-                $filename = $str . $filename;
-                $fileName = basename($filename);
-                $archivoTipo = substr($fileName, 0, 3);
-                $archivoMes = substr($fileName, 5, 2);
-                $archivoAnio = substr($fileName, 7, 4);
-                $archivoPortafolio = substr($fileName, 16, 5);
+            /*
 
-                if ($archivoAnio == $year && $archivoPortafolio == "00364") {
-                    $urlArchivo = $remoteDirectory . $fileName;
-                    $files[$archivoMes][] = ['url_download' => $urlArchivo];
-                }
-            }
-        }
+                foreach ($arr as $file) {
+                    $str = "ED_";
+                    $pos = strpos($file, "ED_");
 
-        // Imprimir la lista de archivos procesados
-        echo "Lista de archivos:<br>";
-        foreach ($files as $mes => $archivos) {
-            echo "Mes: $mes<br>";
-            foreach ($archivos as $archivo) {
-                echo "URL de descarga: " . $archivo['url_download'] . "<br>";
-            }
-            echo "<br>";
+                    if ($pos !== false) {
+                        $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                        $filename = $str . $filename;
+                        $fileName = basename($filename);
+                        $archivoTipo = substr($fileName, 0, 3);
+                        $archivoMes = substr($fileName, 5, 2);
+                        $archivoAnio = substr($fileName, 7, 4);
+                        $archivoPortafolio = substr($fileName, 16, 5);
+                        $paddedNumPortafolio = str_pad($infoUser['Num_Portafolio'], 5, '0', STR_PAD_LEFT);
+
+
+                        if ($archivoAnio == $year && $archivoPortafolio == $paddedNumPortafolio) {
+                            $urlArchivo = $remoteDirectory . $fileName;
+                            $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                        }
+                    }
+                }*/
+
+            // Comando FTP para obtener la lista de archivos
+
+        } catch (Exception $e) {
+            print_r($e);
         }
 
 
