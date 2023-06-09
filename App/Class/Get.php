@@ -29,7 +29,12 @@ class Get
                     $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
                     $filename = $str . $filename;
                     $fileName = basename($filename);
-                    print $fileName;
+                    $archivoTipo = substr($fileName, 0, 3);
+                    $archivoMes = substr($fileName, 5, 2);
+                    $archivoAnio = substr($fileName, 7, 4);
+                    $archivoPortafolio = substr($fileName, 16, 5);
+
+                    print $archivoMes;
                 }
             }
 
