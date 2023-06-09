@@ -22,7 +22,12 @@ class Get
             $arr = explode("\n", $output);
 
             foreach ($arr as $file) {
-                print "ok";
+                $str = "ED_";
+                $pos = strpos($file, "ED_");
+
+                if ($pos !== false) {
+                    print "ok";
+                }
             }
 
 
