@@ -10,17 +10,19 @@ ftp.login(ftpUsername, ftpPassword)
 
 # Obtener la lista de archivos en el directorio actual
 files = []
-ftp.retrbinary('LIST', files.append)
+ftp.retrlines('NLST', files.append)
 
-# Decodificar la respuesta del servidor FTP utilizando 'iso-8859-1'
-decoded_files = []
+# Filtrar y procesar los archivos
+filtered_files = []
 for file in files:
-    decoded_file = file.decode('iso-8859-1')
-    decoded_files.append(decoded_file)
-
-# Imprimir la lista de archivos
-for file in decoded_files:
-    print(file)
+    if file.startswith('ED_'):
+        filtered_files.append(file)
 
 # Cerrar la conexión FTP
+
+
+# Imprimir la lista de archivos en formato de texto normal
+for file in filtered_files:
+    print(file)
+
 ftp.quit()
