@@ -26,7 +26,10 @@ class Get
                 $pos = strpos($file, "ED_");
 
                 if ($pos !== false) {
-                    print "ok";
+                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                    $filename = $str . $filename;
+                    $fileName = basename($filename);
+                    print $fileName;
                 }
             }
 
