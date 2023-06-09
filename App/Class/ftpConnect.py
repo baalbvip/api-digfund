@@ -1,4 +1,5 @@
 from ftplib import FTP
+import json
 
 ftpServer = 'achieveprocessingcenter.com'
 ftpUsername = 'integraciondig'
@@ -18,9 +19,11 @@ for file in files:
     decoded_file = file.decode('iso-8859-1')
     decoded_files.append(decoded_file)
 
-# Imprimir la lista de archivos
-for file in decoded_files:
-    print(file)
+# Convertir la lista de archivos a formato JSON
+json_files = json.dumps(decoded_files)
+
+# Imprimir la lista de archivos en formato JSON
+print(json_files)
 
 # Cerrar la conexión FTP
 ftp.quit()
