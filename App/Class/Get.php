@@ -18,7 +18,7 @@ class Get
 
 
             // Ejecutar el comando y capturar la salida
-            $output = shell_exec("ls -a");
+            $output = shell_exec("python3 App/Class/ftpConnect.py");
 
             print_r($output);
 
