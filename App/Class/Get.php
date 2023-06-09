@@ -20,11 +20,11 @@ class Get
             // Ejecutar el comando y capturar la salida
             $output = shell_exec("python3 App/Class/ftpConnect.py");
             $arr = explode("\n", $output);
+            $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
             foreach ($arr as $file) {
                 $str = "ED_";
                 $pos = strpos($file, "ED_");
-                $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
                 if ($pos !== false) {
                     $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
