@@ -32,7 +32,9 @@ class Get
                     $fileName = basename($filename);
                     $archivoTipo = substr($fileName, 0, 3);
                     $archivoMes = substr($fileName, 5, 2);
-            
+                    $archivoAnio = substr($fileName, 7, 4);
+                    $archivoPortafolio = substr($fileName, 16, 5);
+               
                   
                 }
             }
