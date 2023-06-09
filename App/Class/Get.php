@@ -25,29 +25,30 @@ class Get
             // Imprimir la salida
             $arr = explode("\n", $output);
 
-            /*
-
-                foreach ($arr as $file) {
-                    $str = "ED_";
-                    $pos = strpos($file, "ED_");
-
-                    if ($pos !== false) {
-                        $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                        $filename = $str . $filename;
-                        $fileName = basename($filename);
-                        $archivoTipo = substr($fileName, 0, 3);
-                        $archivoMes = substr($fileName, 5, 2);
-                        $archivoAnio = substr($fileName, 7, 4);
-                        $archivoPortafolio = substr($fileName, 16, 5);
-                        $paddedNumPortafolio = str_pad($infoUser['Num_Portafolio'], 5, '0', STR_PAD_LEFT);
 
 
-                        if ($archivoAnio == $year && $archivoPortafolio == $paddedNumPortafolio) {
-                            $urlArchivo = $remoteDirectory . $fileName;
-                            $months[$archivoMes][] = ['url_download' => $urlArchivo];
-                        }
+            foreach ($arr as $file) {
+                $str = "ED_";
+                $pos = strpos($file, "ED_");
+
+                if ($pos !== false) {
+                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                    $filename = $str . $filename;
+                    $fileName = basename($filename);
+                    $archivoTipo = substr($fileName, 0, 3);
+                    $archivoMes = substr($fileName, 5, 2);
+                    $archivoAnio = substr($fileName, 7, 4);
+                    $archivoPortafolio = substr($fileName, 16, 5);
+                    $paddedNumPortafolio = 00209;
+                    $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
+
+
+                    if ($archivoPortafolio == $paddedNumPortafolio) {
+                        $urlArchivo = $remoteDirectory . $fileName;
+                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
                     }
-                }*/
+                }
+            }
 
             // Comando FTP para obtener la lista de archivos
 
