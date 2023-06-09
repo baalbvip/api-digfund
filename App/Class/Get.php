@@ -10,55 +10,51 @@ class Get
 {
     static function Test()
     {
+        $months = "xd";
 
-        $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
+        $command = "python3 ./ftpConnect.py";
+        $output = shell_exec($command);
 
-        try {
-            $ftpServer = 'achieveprocessingcenter.com';
-            $ftpUsername = 'integraciondig';
-            $ftpPassword = '9ov%1y72DIG#';
+        $arr = explode("\n", $output);
 
-            $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
+        $ftpServer = 'achieveprocessingcenter.com';
+        $ftpUsername = 'integraciondig';
+        $ftpPassword = '9ov%1y72DIG#';
 
-            $year = "2021";
+        $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
-            // Comando FTP para obtener la lista de archivos
-            $command = "ftp -n $ftpServer <<END_SCRIPT
-            quote USER $ftpUsername
-            quote PASS $ftpPassword
-            ls -p
-            quit
-            END_SCRIPT";
+        $year = "2021";
 
-            // Ejecutar el comando y capturar la salida
-            $output = shell_exec($command);
+        $files = [];
 
-            // Imprimir la salida
-            $arr = explode("\n", $output);
+        foreach ($arr as $file) {
+            $str = "ED_";
+            $pos = strpos($file, "ED_");
 
+            if ($pos !== false) {
+                $filename = substr($file, $pos + 3);
+                $filename = $str . $filename;
+                $fileName = basename($filename);
+                $archivoTipo = substr($fileName, 0, 3);
+                $archivoMes = substr($fileName, 5, 2);
+                $archivoAnio = substr($fileName, 7, 4);
+                $archivoPortafolio = substr($fileName, 16, 5);
 
-
-            foreach ($arr as $file) {
-                $str = "ED_";
-                $pos = strpos($file, "ED_");
-
-                if ($pos !== false) {
-                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                    $filename = $str . $filename;
-                    $fileName = basename($filename);
-                    $archivoTipo = substr($fileName, 0, 3);
-                    $archivoMes = substr($fileName, 5, 2);
-                    $archivoAnio = substr($fileName, 7, 4);
-                    $archivoPortafolio = substr($fileName, 16, 5);
-
-                    if ($archivoAnio == $year && $archivoPortafolio == "00364") {
-                        $urlArchivo = $remoteDirectory . $fileName;
-                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
-                    }
+                if ($archivoAnio == $year && $archivoPortafolio == "00364") {
+                    $urlArchivo = $remoteDirectory . $fileName;
+                    $files[$archivoMes][] = ['url_download' => $urlArchivo];
                 }
             }
-        } catch (Exception $e) {
-            print_r($e);
+        }
+
+        // Imprimir la lista de archivos procesados
+        echo "Lista de archivos:<br>";
+        foreach ($files as $mes => $archivos) {
+            echo "Mes: $mes<br>";
+            foreach ($archivos as $archivo) {
+                echo "URL de descarga: " . $archivo['url_download'] . "<br>";
+            }
+            echo "<br>";
         }
 
 
@@ -187,7 +183,6 @@ class Get
                         }
                     }
                 }*/
-
             } else {
                 print "no session";
             }
