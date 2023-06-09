@@ -11,7 +11,7 @@ class Get
     static function Test()
     {
         $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
-        DB::query("INSERT INTO dbo.WEB_ORDEN_WEB (id_order,id_page,fec_order) VALUES ('1','dig','" . time() . "')");
+        DB::query("INSERT INTO dbo.WEB_ORDEN_WEB (id_order,id_page,fec_order) VALUES ('1','dig','" . date("d-m-Y", time()) . "')");
 
 
         return $months;
