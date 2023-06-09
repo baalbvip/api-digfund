@@ -19,8 +19,12 @@ class Get
 
             // Ejecutar el comando y capturar la salida
             $output = shell_exec("python3 App/Class/ftpConnect.py");
+            $arr = explode("\n", $output);
 
-            print_r($output);
+            foreach ($arr as $file) {
+                print "ok";
+            }
+
 
 
             // Comando FTP para obtener la lista de archivos
@@ -127,7 +131,6 @@ class Get
                 // Ejecutar el comando y capturar la salida
                 $output = shell_exec($command);
 
-                print_r($output);
 
                 // Imprimir la salida
                 $arr = explode("\n", $output);
