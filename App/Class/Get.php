@@ -24,6 +24,7 @@ class Get
             foreach ($arr as $file) {
                 $str = "ED_";
                 $pos = strpos($file, "ED_");
+                $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
                 if ($pos !== false) {
                     $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
@@ -33,8 +34,13 @@ class Get
                     $archivoMes = substr($fileName, 5, 2);
                     $archivoAnio = substr($fileName, 7, 4);
                     $archivoPortafolio = substr($fileName, 16, 5);
+                    $paddedNumPortafolio = 00188;
 
-                    print $archivoMes;
+
+                    if ($archivoPortafolio == $paddedNumPortafolio) {
+                        $urlArchivo = $remoteDirectory . $fileName;
+                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                    }
                 }
             }
 
