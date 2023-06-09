@@ -42,11 +42,7 @@ class Get
                     $paddedNumPortafolio = 00209;
                     $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
 
-
-                    if ($archivoPortafolio == $paddedNumPortafolio) {
-                        $urlArchivo = $remoteDirectory . $fileName;
-                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
-                    }
+                    print_r($file);
                 }
             }
 
