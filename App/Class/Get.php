@@ -34,7 +34,7 @@ class Get
                     $archivoMes = substr($fileName, 5, 2);
                     $archivoAnio = substr($fileName, 7, 4);
                     $archivoPortafolio = substr($fileName, 16, 5);
-               
+                    $paddedNumPortafolio = "00188";
                   
                 }
             }
