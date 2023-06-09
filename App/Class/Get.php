@@ -18,7 +18,7 @@ class Get
 
 
             // Ejecutar el comando y capturar la salida
-            $output = shell_exec("python3 ./ftpConnect.py");
+            $output = shell_exec("python3");
 
             print_r($output);
 
