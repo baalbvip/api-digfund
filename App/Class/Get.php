@@ -24,7 +24,9 @@ class Get
             // Imprimir la salida
             $arr = explode("\n", $output);
 
-            print_r($arr);
+            for ($i = 0; $i < 3; $i++) {
+                print_r($arr[$i]);
+            }
 
             // Comando FTP para obtener la lista de archivos
 
