@@ -24,10 +24,17 @@ class Get
             // Imprimir la salida
             $arr = explode("\n", $output);
 
-            for ($i = 0; $i < 3; $i++) {
-                print_r($arr[$i]);
-            }
+            foreach ($arr as $file) {
+                $str = "ED_";
+                $pos = strpos($file, "ED_");
 
+                if ($pos !== false) {
+                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                    $filename = $str . $filename;
+                    $fileName = basename($filename);
+
+                }
+            }
             // Comando FTP para obtener la lista de archivos
 
         } catch (Exception $e) {
