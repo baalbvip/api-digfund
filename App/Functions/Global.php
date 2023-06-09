@@ -67,7 +67,7 @@ function CreateOrder($user, $params)
             [1, $infoUser['Num_Portafolio'], $params['amount'], 10, 0, 0, 0, 0, time(), 0, 0, date("Y-m-d")]
         );*/
 
-        DB::insert("INSERT INTO dbo.WEB_ORDEN_WEB (id_order,id_page,fec_order) VALUES (?,?,?)",[$params['order_id'],'dig',time()]);
+        DB::query("INSERT INTO dbo.WEB_ORDEN_WEB (id_order,id_page,fec_order) VALUES ('" . $params['order_id'] . "','dig','" . time() . "')");
 
         DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_ORDEN_SOLICITUD @cod_cuenta = '" . $infoUser['Num_Portafolio'] . "', @obs_solicitud = '" . $params['order_id'] . "', @fec_solicitud = '" . DateTime() . "', @mon_efectivo = '$params[amount]', @pError = '1'");
 
