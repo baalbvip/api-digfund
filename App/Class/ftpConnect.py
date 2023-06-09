@@ -15,6 +15,7 @@ ftp.retrlines('NLST', files.append)
 # Filtrar y procesar los archivos
 filtered_files = []
 for file in files:
+    file = file.decode('iso-8859-1')
     if file.startswith('ED_'):
         filtered_files.append(file)
 
