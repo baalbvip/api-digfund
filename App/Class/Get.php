@@ -21,29 +21,37 @@ class Get
             $output = shell_exec("python3 App/Class/ftpConnect.py");
             $arr = explode("\n", $output);
             $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
+            $year = empty($_GET['year']) == true ? $year = date("Y") : $_GET['year'];
 
-            foreach ($arr as $file) {
-                $str = "ED_";
-                $pos = strpos($file, "ED_");
+            $session = CheckSession();
 
-                if ($pos !== false) {
-                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                    $filename = $str . $filename;
-                    $fileName = basename($filename);
-                    $archivoTipo = substr($fileName, 0, 3);
-                    $archivoMes = substr($fileName, 5, 2);
-                    $archivoAnio = substr($fileName, 7, 4);
-                    $archivoPortafolio = substr($fileName, 16, 5);
-                    $paddedNumPortafolio = "00188";
+            if ($session) {
+                $infoUser = ExistsUser($session);
 
-                    
-                    if ($archivoPortafolio == $paddedNumPortafolio) {
-                        $urlArchivo = $remoteDirectory . $fileName;
-                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                foreach ($arr as $file) {
+                    $str = "ED_";
+                    $pos = strpos($file, "ED_");
+
+                    if ($pos !== false) {
+                        $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                        $filename = $str . $filename;
+                        $fileName = basename($filename);
+                        $archivoTipo = substr($fileName, 0, 3);
+                        $archivoMes = substr($fileName, 5, 2);
+                        $archivoAnio = substr($fileName, 7, 4);
+                        $archivoPortafolio = substr($fileName, 16, 5);
+                        $paddedNumPortafolio = str_pad($infoUser['Num_Portafolio'], 5, '0', STR_PAD_LEFT);
+
+
+                        if ($archivoAnio == $year && $archivoPortafolio == $paddedNumPortafolio) {
+                            $urlArchivo = $remoteDirectory . $fileName;
+                            $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                        }
                     }
                 }
+            } else {
+                print "no session";
             }
-
 
 
             // Comando FTP para obtener la lista de archivos
@@ -127,34 +135,20 @@ class Get
         $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
 
         try {
-            $ftpServer = 'achieveprocessingcenter.com';
-            $ftpUsername = 'integraciondig';
-            $ftpPassword = '9ov%1y72DIG#';
 
+
+
+
+            // Ejecutar el comando y capturar la salida
+            $output = shell_exec("python3 App/Class/ftpConnect.py");
+            $arr = explode("\n", $output);
             $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
-
             $year = empty($_GET['year']) == true ? $year = date("Y") : $_GET['year'];
 
             $session = CheckSession();
 
             if ($session) {
                 $infoUser = ExistsUser($session);
-
-                $command = "ftp -n $ftpServer <<END_SCRIPT
-                quote USER $ftpUsername
-                quote PASS $ftpPassword
-                ls -p
-                quit
-                END_SCRIPT";
-
-                // Ejecutar el comando y capturar la salida
-                $output = shell_exec($command);
-
-
-                // Imprimir la salida
-                $arr = explode("\n", $output);
-
-                /*
 
                 foreach ($arr as $file) {
                     $str = "ED_";
@@ -176,10 +170,12 @@ class Get
                             $months[$archivoMes][] = ['url_download' => $urlArchivo];
                         }
                     }
-                }*/
+                }
             } else {
                 print "no session";
             }
+
+
             // Comando FTP para obtener la lista de archivos
 
         } catch (Exception $e) {
