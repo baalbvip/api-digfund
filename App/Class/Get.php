@@ -18,7 +18,17 @@ class Get
 
 
             // Ejecutar el comando y capturar la salida
-            $output = shell_exec("python3 App/Class/ftpConnect.py");
+            $ftpServer = 'achieveprocessingcenter.com';
+            $ftpUsername = 'integraciondig';
+            $ftpPassword = '9ov%1y72DIG#';
+            $command = "ftp -n $ftpServer <<END_SCRIPT
+                quote USER $ftpUsername
+                quote PASS $ftpPassword
+                ls -p
+                quit
+                END_SCRIPT";
+
+            $output = shell_exec($command);
 
 
             // Imprimir la salida
@@ -33,6 +43,7 @@ class Get
                     $filename = $str . $filename;
                     $fileName = basename($filename);
 
+                    print_r($fileName);
                 }
             }
             // Comando FTP para obtener la lista de archivos
