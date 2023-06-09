@@ -23,7 +23,10 @@ class Upload
 
             NewLog("Se creo el usuario $params[billing_email]");
         } else {
-            CreateOrder($params['billing_email'], $params);
+
+            if (!ExistsOrder($params['order_id'])) {
+                CreateOrder($params['billing_email'], $params);
+            }
         }
 
         NewLog(json_encode($_POST));

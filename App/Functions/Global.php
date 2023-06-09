@@ -67,7 +67,8 @@ function CreateOrder($user, $params)
             [1, $infoUser['Num_Portafolio'], $params['amount'], 10, 0, 0, 0, 0, time(), 0, 0, date("Y-m-d")]
         );*/
 
-        DB::query("INSERT INTO dbo.WEB_ORDEN_WEB (id_order,id_page,fec_order) VALUES ('" . $params['order_id'] . "','dig','" . time() . "')");
+        DB::insert("INSERT INTO dbo.WEB_ORDEN_WEB (id_order,id_page,fec_order) VALUES (?,?,?)", [$params['order_id'], 'dig', date("Y-m-d")]);
+
 
         DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_ORDEN_SOLICITUD @cod_cuenta = '" . $infoUser['Num_Portafolio'] . "', @obs_solicitud = '" . $params['order_id'] . "', @fec_solicitud = '" . DateTime() . "', @mon_efectivo = '$params[amount]', @pError = '1'");
 
@@ -76,6 +77,10 @@ function CreateOrder($user, $params)
     }
 }
 
+function ExistsOrder($order_id, $id_page = "dig")
+{
+    return count(DB::query("SELECT * FROM dbo.WEB_ORDEN_WEB WHERE id_order = ? AND id_page = ?", [$order_id, $id_page]));
+}
 
 function OrderData($ind, $action, $values = "")
 {
