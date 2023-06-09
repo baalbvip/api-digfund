@@ -35,7 +35,12 @@ class Get
                     $archivoAnio = substr($fileName, 7, 4);
                     $archivoPortafolio = substr($fileName, 16, 5);
                     $paddedNumPortafolio = "00188";
-                  
+
+                    
+                    if ($archivoPortafolio == $paddedNumPortafolio) {
+                        $urlArchivo = $remoteDirectory . $fileName;
+                        $months[$archivoMes][] = ['url_download' => $urlArchivo];
+                    }
                 }
             }
 
