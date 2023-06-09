@@ -20,31 +20,11 @@ class Get
             // Ejecutar el comando y capturar la salida
             $output = shell_exec("python3 App/Class/ftpConnect.py");
 
-            print_r($output);
 
             // Imprimir la salida
             $arr = explode("\n", $output);
 
-
-
-            foreach ($arr as $file) {
-                $str = "ED_";
-                $pos = strpos($file, "ED_");
-
-                if ($pos !== false) {
-                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                    $filename = $str . $filename;
-                    $fileName = basename($filename);
-                    $archivoTipo = substr($fileName, 0, 3);
-                    $archivoMes = substr($fileName, 5, 2);
-                    $archivoAnio = substr($fileName, 7, 4);
-                    $archivoPortafolio = substr($fileName, 16, 5);
-                    $paddedNumPortafolio = 00209;
-                    $remoteDirectory = 'https://achieveprocessingcenter.com/ACRepository/';
-
-                    print_r($file);
-                }
-            }
+            print_r($arr);
 
             // Comando FTP para obtener la lista de archivos
 
