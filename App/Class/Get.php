@@ -38,13 +38,12 @@ class Get
                 $str = "ED_";
                 $pos = strpos($file, "ED_");
 
-                if ($pos !== false) {
-                    $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                    $filename = $str . $filename;
-                    $fileName = basename($filename);
 
-                    print_r($fileName);
-                }
+                $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
+                $filename = $str . $filename;
+                $fileName = basename($filename);
+
+                print_r($fileName);
             }
             // Comando FTP para obtener la lista de archivos
 
