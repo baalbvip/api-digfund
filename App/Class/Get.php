@@ -18,33 +18,11 @@ class Get
 
 
             // Ejecutar el comando y capturar la salida
-            $ftpServer = 'achieveprocessingcenter.com';
-            $ftpUsername = 'integraciondig';
-            $ftpPassword = '9ov%1y72DIG#';
-            $command = "ftp -n $ftpServer <<END_SCRIPT
-                quote USER $ftpUsername
-                quote PASS $ftpPassword
-                ls -p
-                quit
-                END_SCRIPT";
+            $output = shell_exec("python3 App/Class/ftpConnect.py");
 
-            $output = shell_exec($command);
+            print_r($output);
 
 
-            // Imprimir la salida
-            $arr = explode("\n", $output);
-
-            foreach ($arr as $file) {
-                $str = "ED_";
-                $pos = strpos($file, "ED_");
-
-
-                $filename = substr($file, $pos + 3);  // Obtener la porción de la cadena después de "EC_"
-                $filename = $str . $filename;
-                $fileName = basename($filename);
-
-                print_r($fileName);
-            }
             // Comando FTP para obtener la lista de archivos
 
         } catch (Exception $e) {
