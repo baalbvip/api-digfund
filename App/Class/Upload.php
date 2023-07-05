@@ -31,7 +31,8 @@ class Upload
             }
         }
 
-        NewLog(json_encode($_POST));
+        print "ok";
+    
     }
 
 
