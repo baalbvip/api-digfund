@@ -14,6 +14,8 @@ class Upload
 
         $params = $_POST;
 
+        NewLog(json_encode($_POST));
+
 
         if (!ExistsUser($params['billing_email'])) {
             $idUser = CreateUser($params);
