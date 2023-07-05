@@ -16,23 +16,24 @@ class Upload
 
         NewLog(json_encode($_POST));
 
+        if (!empty($_POST['billing_email'])) {
 
-        if (!ExistsUser($params['billing_email'])) {
-            $idUser = CreateUser($params);
+            if (!ExistsUser($params['billing_email'])) {
+                $idUser = CreateUser($params);
 
-            // Si recibes un ID USER, significa que entonces si se registro el usuario entonces creale la orden con su ID asociada.
-            CreateOrder($params['billing_email'], $params);
-
-            NewLog("Se creo el usuario $params[billing_email]");
-        } else {
-
-            if (!ExistsOrder($params['order_id'])) {
+                // Si recibes un ID USER, significa que entonces si se registro el usuario entonces creale la orden con su ID asociada.
                 CreateOrder($params['billing_email'], $params);
+
+                NewLog("Se creo el usuario $params[billing_email]");
+            } else {
+
+                if (!ExistsOrder($params['order_id'])) {
+                    CreateOrder($params['billing_email'], $params);
+                }
             }
         }
 
         print "ok";
-    
     }
 
 
