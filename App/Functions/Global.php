@@ -56,6 +56,8 @@ function CreateOrder($user, $params)
 
     $infoUser = ExistsUser($user);
 
+    NewLog("xd");
+
     if ($infoUser) {
         // Significa que este usuario existe entonces vamos a crearle la orden que requiere
 
@@ -66,6 +68,9 @@ function CreateOrder($user, $params)
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
             [1, $infoUser['Num_Portafolio'], $params['amount'], 10, 0, 0, 0, 0, time(), 0, 0, date("Y-m-d")]
         );*/
+
+        NewLog(json_encode($infoUser));
+        NewLog(json_encode($params));
 
         DB::insert("INSERT INTO dbo.WEB_ORDEN_WEB (id_order,id_page,fec_order) VALUES (?,?,?)", [$params['order_id'], 'dig', date("Y-m-d")]);
 
