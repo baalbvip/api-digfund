@@ -7,6 +7,18 @@ use PDO;
 
 class Upload
 {
+    static function RegisterNewUser()
+    {
+        $case = $_POST['case'];
+        
+        switch ($case) {
+            case 'all':
+                break;
+            case 'dig':
+                break;
+        }
+    }
+
     static function Order()
     {
         // esta funcion sera la encargada de subir el usuario y la orden
