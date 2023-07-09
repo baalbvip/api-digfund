@@ -22,3 +22,4 @@ App::Route("/api/get/statusaccount", [Get::class, "StatusAccount"]);
 
 App::Route("/api/upload/orderprepare", [Upload::class, "OrderPrepare"]);
 App::Route("/api/upload/order", [Upload::class, "Order"]);
+App::Route("/api/upload/registeruser", [Upload::class, "RegisterNewUser"]);
