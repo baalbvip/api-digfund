@@ -1,8 +1,80 @@
 <?php
+require("../../vendor/autoload.php");
 
+use Automattic\WooCommerce\Client;
+use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Connection\DB;
 
 $APP_KEY = "APP_SECRET_Xxi6Jpl4UXzo0rFH2W9WPuNQKsruzDGa";
+
+function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $company)
+{
+
+    $woocommerce = new Client(
+        'https://staging2.dig-fund.com',
+        'ck_07e03d20090f409670460cbc7f1619122a4e7c47',
+        'cs_5c019fcafe60ef45f6e66cc235df524edcfa2b67',
+        [
+            'wp_api' => true,
+            'version' => 'wc/v3',
+            'query_string_auth' => true,
+        ]
+    );
+
+
+    // Verificar la conexión con la API de WooCommerce
+    try {
+        $woocommerce->get('customers');
+        // echo 'Conexión exitosa con la API de WooCommerce.' . PHP_EOL;
+    } catch (HttpClientException $e) {
+        echo 'Error de conexión con la API de WooCommerce: ' . $e->getMessage() . PHP_EOL;
+        exit;
+    }
+
+    $userData = array(
+        'email' => $email,
+        'role' => 'customer',
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'billing' => array(
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'company' => $company,
+            'address_1' => 'casa',
+            /*'city' => $row[7],
+            'state' => $row[8],
+            'country' => $row[9],
+            'phone' => $row[10],*/
+            // Agregar más campos de facturación según corresponda
+        ),
+        'meta_data' => array(
+            array(
+                'key' => 'n_portafolio',
+                'value' => $n_portafolio, // Ajusta el índice si el campo n_portafolio no está en la columna 11
+            ),
+            // Agregar más campos de metadatos según corresponda
+        ),
+    );
+    try {
+        $newCustomer = $woocommerce->post('customers', $userData);
+        NewLog("cliente creado correctamente a digfund.com $email");
+    } catch (Automattic\WooCommerce\HttpClient\HttpClientException $e) {
+        if ($e->getCode() === 400) {
+            $response = json_decode($e->getMessage());
+            if (isset($response->message) && isset($response->data->status)) {
+                if ($response->data->status === 'registration-error-email-exists') {
+                    NewLog("error al crear el cliente $email");
+                } else {
+                    NewLog("error al crear el cliente $email");
+                }
+            } else {
+                NewLog("error al crear el cliente $email");
+            }
+        } else {
+            NewLog("error al crear el cliente $email");
+        }
+    }
+}
 
 function ExistsUser($user)
 {

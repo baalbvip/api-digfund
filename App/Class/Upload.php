@@ -9,14 +9,30 @@ class Upload
 {
     static function RegisterNewUser()
     {
+
+        $key = $_POST['key'];
         $case = $_POST['case'];
-        
-        switch ($case) {
-            case 'all':
-                break;
-            case 'dig':
-                break;
+        $email = $_POST['email'];
+        $n_portafolio = $_POST['n_portafolio'];
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $company = $_POST['company'];
+
+        if (CheckAppKey($key)) {
+            switch ($case) {
+                case 'all':
+                    break;
+                case 'dig':
+                    $status = RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $company);
+                    break;
+            }
+        } else {
+            $msg = "secrect key is invalid";
         }
+
+
+
+        return ['status' => $status, 'msg' => $msg];
     }
 
     static function Order()
