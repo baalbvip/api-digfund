@@ -57,21 +57,21 @@ function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $co
     );
     try {
         $newCustomer = $woocommerce->post('customers', $userData);
-        NewLog("cliente creado correctamente a digfund.com $email");
+        #NewLog("cliente creado correctamente a digfund.com $email");
     } catch (Automattic\WooCommerce\HttpClient\HttpClientException $e) {
         if ($e->getCode() === 400) {
             $response = json_decode($e->getMessage());
             if (isset($response->message) && isset($response->data->status)) {
                 if ($response->data->status === 'registration-error-email-exists') {
-                    NewLog("error al crear el cliente $email");
+                    #NewLog("error al crear el cliente $email");
                 } else {
-                    NewLog("error al crear el cliente $email");
+                    #NewLog("error al crear el cliente $email");
                 }
             } else {
-                NewLog("error al crear el cliente $email");
+                #NewLog("error al crear el cliente $email");
             }
         } else {
-            NewLog("error al crear el cliente $email");
+            #NewLog("error al crear el cliente $email");
         }
     }
 }
