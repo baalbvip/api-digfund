@@ -1,5 +1,5 @@
 <?php
-require("../../vendor/autoload.php");
+require($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php");
 
 use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
