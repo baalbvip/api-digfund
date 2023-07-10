@@ -4,6 +4,7 @@ namespace Class\Upload;
 
 use Connection\DB;
 use PDO;
+error_reporting(E_ALL);
 
 class Upload
 {
