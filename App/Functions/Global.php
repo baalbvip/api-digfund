@@ -58,6 +58,7 @@ function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $co
     try {
         $newCustomer = $woocommerce->post('customers', $userData);
         #NewLog("cliente creado correctamente a digfund.com $email");
+        $status = true;
     } catch (Automattic\WooCommerce\HttpClient\HttpClientException $e) {
         if ($e->getCode() === 400) {
             $response = json_decode($e->getMessage());
@@ -74,6 +75,8 @@ function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $co
             #NewLog("error al crear el cliente $email");
         }
     }
+
+    return $status;
 }
 
 function ExistsUser($user)
