@@ -127,7 +127,6 @@ class Get
                 print "no session";
             }
 
-
             // Comando FTP para obtener la lista de archivos
 
         } catch (Exception $e) {
