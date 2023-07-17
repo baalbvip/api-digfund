@@ -79,14 +79,13 @@ function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $co
     return $status;
 }
 
-function ExistsUser($user)
+function ExistsUser($email, $user = null)
 {
 
-
     if (is_numeric($user)) {
-        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$user' or Num_Portafolio = '$user'")[0];
+        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$email' or Num_Portafolio = '$email'")[0];
     } else {
-        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$user'")[0];
+        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$email'")[0];
     }
 }
 
