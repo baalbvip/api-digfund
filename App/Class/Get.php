@@ -42,6 +42,8 @@ class Get
                 if ($infoUser) {
                     $token = GenerateToken();
 
+                    NewLog("Se creo la session con el usuario con el email $email y el usuario $user");
+
                     $insert = DB::insert("INSERT INTO dbo.ksq_sessions (ip,user_id,hash,time_add,time_expire) 
                     VALUES 
                     (?,?,?,?,?)", [$_SERVER['REMOTE_ADDR'], $infoUser['Num_Portafolio'], $token, time(), strtotime("+2 Days")]);
