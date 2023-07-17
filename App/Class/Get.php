@@ -34,10 +34,11 @@ class Get
 
         $appKey = $_POST['app_key'];
         $email = $_POST['email'];
+        $user = $_POST['user'];
 
         if (!empty($appKey) && !empty($email)) {
             if (CheckAppKey($appKey)) {
-                $infoUser = ExistsUser($email);
+                $infoUser = ExistsUser($email, $user);
                 if ($infoUser) {
                     $token = GenerateToken();
 
