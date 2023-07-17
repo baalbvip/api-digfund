@@ -82,6 +82,10 @@ function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $co
 function ExistsUser($email, $user = null)
 {
 
+    if ($user == null) {
+        $user = "xoo32p232k3o23o3232o";
+    }
+
     if (is_numeric($email)) {
         $response = DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$email' or Num_Portafolio = '$email'")[0];
     } else {
