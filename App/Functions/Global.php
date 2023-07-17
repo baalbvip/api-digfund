@@ -112,6 +112,8 @@ function CreateUser($params)
 
         $procedure = DB::procedure("EXECUTE dbo.SP_WEB_REGISTRAR_CUENTA_IN @pNombre = '$first_name', @pApellidos = '$last_name', @pCorreo = '$email',@pDireccion = '$country',@pTelefono = '$phone',@pUsuario = '$email',@pContrasenna = 'default',@pTipo = 'E', @pUsuario_Registro = '" . DateTime() . "', @pError = 'x',@nom_cuenta = '$first_name',@fec_apertura = '" . DateTime() . "',@cod_ejecutivo = '$asesor', @pNum_Portafolio = '$num_port', @tipoOperacion = '1'");
         $id = ExistsUser($email)['Id_Usuario'];
+
+        NewLog("Usuario creado con exito $email");
     } catch (Exception $err) {
         NewLog($err);
     }
