@@ -83,9 +83,16 @@ function ExistsUser($email, $user = null)
 {
 
     if (is_numeric($email)) {
-        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$email' or Num_Portafolio = '$email'")[0];
+        $response = DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$email' or Num_Portafolio = '$email'")[0];
     } else {
-        return DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$email'")[0];
+
+        $response = DB::query("SELECT * FROM dbo.UsuariosTmp WHERE Usuario = '$user' or Correo = '$email'")[0];
+    }
+
+
+    if ($response) {
+        NewLog("Se consigui el usuario " . json_encode($response));
+        return $response;
     }
 }
 
