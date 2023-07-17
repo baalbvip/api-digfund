@@ -68,6 +68,8 @@ class Get
 
         if ($session) {
             $infoUser = ExistsUser($session);
+
+            NewLog(json_encode($infoUser));
             $response = DB::procedure("EXECUTE dbo.SP_WEB_TransaccionesDIG @Portafolio = " . $infoUser['Num_Portafolio'] . "");
             return $response;
         }
