@@ -64,6 +64,8 @@ class Get
     {
         $session = CheckSession();
 
+        NewLog($session);
+
         if ($session) {
             $infoUser = ExistsUser($session);
             $response = DB::procedure("EXECUTE dbo.SP_WEB_TransaccionesDIG @Portafolio = " . $infoUser['Num_Portafolio'] . "");
