@@ -90,4 +90,9 @@ class Upload
 
         return ['status' => $status, 'msg' => $msg];
     }
+
+    static function RenewContract()
+    {
+        return ['status' => "Xd"];
+    }
 }
