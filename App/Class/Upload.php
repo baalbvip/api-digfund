@@ -119,7 +119,7 @@ class Upload
             $id = $_POST['id'];
 
             try {
-                CreateContractRenew("test2123");
+                CreateContractRenew($infoUser['Num_Portafolio'] . "-" . "reinvertion-$id");
 
                 DB::procedure("
                 EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
