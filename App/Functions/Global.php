@@ -275,9 +275,10 @@ function CreateContractRenew($namefile)
         $file = str_replace('$codeswift', $codeswift, $file);
         $file = str_replace('$codeaba', $codeaba, $file);
 
-        print $file;
 
-        print "ok";
+        $create = fopen("./Files/Contract/$namefile.html", "w");
+        fwrite($create, $file);
+        fclose($create);
     } catch (Exception $err) {
         print_r($err);
     }
