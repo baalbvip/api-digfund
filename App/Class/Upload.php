@@ -3,6 +3,7 @@
 namespace Class\Upload;
 
 use Connection\DB;
+use Exception;
 use PDO;
 
 error_reporting(E_ALL);
@@ -116,26 +117,32 @@ class Upload
             $account = $_POST['account'];
             $id = $_POST['id'];
 
-            DB::procedure("
-            EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
-            @pFechaAceptacion = '" . DateTime() . "', 
-            @pNum_Portafolio = '" . $infoUser['Num_Portafolio'] . "',
-            @pNombreCliente = '$name',
-            @pIdentificacion = '$dni', 
-            @pFechaNacimiento = '$birthday',
-            @pLugarNacimiento = '$birthzone',
-            @pUsa = '$id',
-            @pCorreo = '$email',
-            @pDireccionFisica = '$direction',
-            @pDireccionResidencia = '$home',
-            @pBanco = '$bankname',
-            @pDireccionBanco = '$directionbank',
-            @pCuentaBanco = '$account',   
-            @pCodigoSwift = '$codeswift',
-            @pCodigoAba = '$codeaba',
-            @pInfo = 'xd', 
-            @pUsuario_Registro = '" . $infoUser['Correo'] . "'
-            ");
+            try {
+                DB::procedure("
+                EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
+                @pFechaAceptacion = '" . DateTime() . "', 
+                @pNum_Portafolio = '" . $infoUser['Num_Portafolio'] . "',
+                @pNombreCliente = '$name',
+                @pIdentificacion = '$dni', 
+                @pFechaNacimiento = '$birthday',
+                @pLugarNacimiento = '$birthzone',
+                @pUsa = '$id',
+                @pCorreo = '$email',
+                @pDireccionFisica = '$direction',
+                @pDireccionResidencia = '$home',
+                @pBanco = '$bankname',
+                @pDireccionBanco = '$directionbank',
+                @pCuentaBanco = '$account',   
+                @pCodigoSwift = '$codeswift',
+                @pCodigoAba = '$codeaba',
+                @pInfo = 'xd', 
+                @pUsuario_Registro = '" . $infoUser['Correo'] . "'
+                ");
+            } catch (Exception $err) {
+                print_r($err);
+            }
+
+
 
             $status = true;
         }
