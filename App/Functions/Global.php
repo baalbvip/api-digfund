@@ -275,8 +275,7 @@ function CreateContractRenew($namefile)
         $file = str_replace('$codeswift', $codeswift, $file);
         $file = str_replace('$codeaba', $codeaba, $file);
 
-
-  
+        print $file;
     } catch (Exception $err) {
         print_r($err);
     }
