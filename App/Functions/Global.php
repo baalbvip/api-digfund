@@ -259,26 +259,7 @@ function CreateContractRenew($namefile)
     $id = $_POST['id'];
 
     try {
-        $file = file_get_contents("./Files/BodyContractRenew.html");
-        $file = str_replace('$name', $name, $file);
-        $file = str_replace('$dni', $dni, $file);
-        $file = str_replace('$birthday', $birthday, $file);
-        $file = str_replace('$birthzone', $birthzone, $file);
-        $file = str_replace('$home', $home, $file);
-        $file = str_replace('$work', $work, $file);
-        $file = str_replace('$direction', $direction, $file);
-        // $file = str_replace('$phone', $phone, $file);
-        $file = str_replace('$email', $email, $file);
-        //$file = str_replace('$initial', $initial, $file);
-        $file = str_replace('$bank', $bankname, $file);
-        $file = str_replace('$directionbank', $directionbank, $file);
-        $file = str_replace('$codeswift', $codeswift, $file);
-        $file = str_replace('$codeaba', $codeaba, $file);
-
-
-        $create = fopen("./Files/Contract/$namefile.html", "r+w");
-        fwrite($create, $file);
-        fclose($create);
+      
     } catch (Exception $err) {
         print_r($err);
     }
