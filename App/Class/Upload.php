@@ -96,10 +96,15 @@ class Upload
 
         $session = CheckSession();
 
+
+
         if ($session) {
+            $infoUser = ExistsUser($session);
+
             $name = $_POST['name'];
             $dni = $_POST['dni'];
             $birthday = $_POST['birthday'];
+            $birthzone = $_POST['birthzone'];
             $home = $_POST['home'];
             $work = $_POST['work'];
             $direction = $_POST['direction'];
@@ -109,9 +114,33 @@ class Upload
             $codeswift = $_POST['codeswift'];
             $codeaba = $_POST['codeaba'];
             $account = $_POST['account'];
+            $id = $_POST['id'];
+
+            DB::procedure("
+            EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
+            @pFechaAceptacion = '" . DateTime() . "', 
+            @pNum_Portafolio = '" . $infoUser['Num_Portafolio'] . "',
+            @pNombreCliente = '$name',
+            @pIdentificacion = '$dni', 
+            @pFechaNacimiento = '$birthday',
+            @pLugarNacimiento = '$birthzone',
+            @pUsa = '$id',
+            @pCorreo = '$email',
+            @pDireccionFisica = '$direction',
+            @pDireccionResidencia = '$home',
+            @pBanco = '$bankname',
+            @pDireccionBanco = '$directionbank',
+            @pCuentaBanco = '$account',   
+            @pCodigoSwift = '$codeswift',
+            @pCodigoAba = '$codeaba',
+            @pInfo = '', 
+            @pUsuario_Registro = '" . $infoUser['Correo'] . "'
+            ");
+
+            $status = true;
         }
 
 
-        return ['status' => $session];
+        return ['status' => $status];
     }
 }
