@@ -102,7 +102,6 @@ class Upload
         if ($session) {
             $infoUser = ExistsUser($session);
 
-
             $name = $_POST['name'];
             $dni = $_POST['dni'];
             $birthday = $_POST['birthday'];
