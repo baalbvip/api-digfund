@@ -136,6 +136,7 @@ class Upload
                 @pCodigoSwift = '$codeswift',
                 @pCodigoAba = '$codeaba',
                 @pInfo = 'xd', 
+                @pError = '0',
                 @pUsuario_Registro = '" . $infoUser['Correo'] . "'
                 ");
             } catch (Exception $err) {
