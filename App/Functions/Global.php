@@ -79,6 +79,10 @@ function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $co
     return $status;
 }
 
+function ExistsContract(){
+    
+}
+
 function ExistsUser($email, $user = null)
 {
 

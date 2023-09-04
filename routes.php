@@ -15,7 +15,7 @@ App::Route("/api/get/myinfo", [Get::class, "MyInfo"]);
 App::Route("/api/get/consolidated", [Get::class, "Consolidated"]);
 App::Route("/api/get/detailorder", [Get::class, "DetailOrder"]);
 App::Route("/api/get/statusaccount", [Get::class, "StatusAccount"]);
-
+App::Route("/api/get/invertionsexpired", [Get::class, "InvertionExpireds"]);
 
 
 // UPLOAD

@@ -8,6 +8,23 @@ use PDO;
 
 class Get
 {
+
+    static function InvertionExpireds()
+    {
+        $token = $_POST['token'];
+
+        $session = CheckSession($token);
+        $result = [];
+
+        if ($session) {
+
+            $infoUser = ExistsUser($session);
+            $result = DB::procedure("EXECUTE dbo.SP_WEB_Vencimientos_DIG @Cuenta = '" . $infoUser['Num_Portafolio'] . "'");
+        }
+
+        return $result;
+    }
+
     static function Test()
     {
         $months = ["01" => [], "02" => [], "03" => [], "04" => [], "05" => [], "06" => [], "07" => [], "08" => [], "09" => [], "10" => [], "11" => [], "12" => []];
