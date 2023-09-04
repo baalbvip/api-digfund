@@ -93,6 +93,25 @@ class Upload
 
     static function RenewContract()
     {
-        return ['status' => "Xd"];
+
+        $session = CheckSession();
+
+        if ($session) {
+            $name = $_POST['name'];
+            $dni = $_POST['dni'];
+            $birthday = $_POST['birthday'];
+            $home = $_POST['home'];
+            $work = $_POST['work'];
+            $direction = $_POST['direction'];
+            $email = $_POST['email'];
+            $bankname = $_POST['bankname'];
+            $directionbank = $_POST['directionbank'];
+            $codeswift = $_POST['codeswift'];
+            $codeaba = $_POST['codeaba'];
+            $account = $_POST['account'];
+        }
+
+
+        return ['status' => $session];
     }
 }
