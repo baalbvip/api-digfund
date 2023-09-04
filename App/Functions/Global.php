@@ -79,8 +79,8 @@ function RegisterUserDigfund($first_name, $last_name, $email, $n_portafolio, $co
     return $status;
 }
 
-function ExistsContract(){
-    
+function ExistsContract()
+{
 }
 
 function ExistsUser($email, $user = null)
@@ -238,4 +238,44 @@ function CheckSession()
 function DateTime()
 {
     return date("Y-m-d h:i:s");
+}
+
+function CreateContractRenew($namefile)
+{
+
+    $name = $_POST['name'];
+    $dni = $_POST['dni'];
+    $birthday = $_POST['birthday'];
+    $birthzone = $_POST['birthzone'];
+    $home = $_POST['home'];
+    $work = $_POST['work'];
+    $direction = $_POST['direction'];
+    $email = $_POST['email'];
+    $bankname = $_POST['bankname'];
+    $directionbank = $_POST['directionbank'];
+    $codeswift = $_POST['codeswift'];
+    $codeaba = $_POST['codeaba'];
+    $account = $_POST['account'];
+    $id = $_POST['id'];
+
+    $file = file_get_contents("./Files/BodyContractRenew.html");
+    $file = str_replace('$name', $name, $file);
+    $file = str_replace('$dni', $dni, $file);
+    $file = str_replace('$birthday', $birthday, $file);
+    $file = str_replace('$birthzone', $birthzone, $file);
+    $file = str_replace('$home', $home, $file);
+    $file = str_replace('$work', $work, $file);
+    $file = str_replace('$direction', $direction, $file);
+    // $file = str_replace('$phone', $phone, $file);
+    $file = str_replace('$email', $email, $file);
+    //$file = str_replace('$initial', $initial, $file);
+    $file = str_replace('$bank', $bankname, $file);
+    $file = str_replace('$directionbank', $directionbank, $file);
+    $file = str_replace('$codeswift', $codeswift, $file);
+    $file = str_replace('$codeaba', $codeaba, $file);
+
+
+    $create = fopen("./Files/Contract/$namefile.html", "r+w");
+    fwrite($create, $file);
+    fclose($create);
 }
