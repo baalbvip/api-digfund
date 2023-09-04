@@ -133,7 +133,7 @@ class Upload
             @pCuentaBanco = '$account',   
             @pCodigoSwift = '$codeswift',
             @pCodigoAba = '$codeaba',
-            @pInfo = '', 
+            @pInfo = 'xd', 
             @pUsuario_Registro = '" . $infoUser['Correo'] . "'
             ");
 
