@@ -102,6 +102,8 @@ class Upload
         if ($session) {
             $infoUser = ExistsUser($session);
 
+            CreateContractRenew("test2123");
+
             $name = $_POST['name'];
             $dni = $_POST['dni'];
             $birthday = $_POST['birthday'];
