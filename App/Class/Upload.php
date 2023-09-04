@@ -102,7 +102,6 @@ class Upload
         if ($session) {
             $infoUser = ExistsUser($session);
 
-            CreateContractRenew("test2123");
 
             $name = $_POST['name'];
             $dni = $_POST['dni'];
@@ -120,6 +119,8 @@ class Upload
             $id = $_POST['id'];
 
             try {
+                CreateContractRenew("test2123");
+
                 DB::procedure("
                 EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
                 @pFechaAceptacion = '" . DateTime() . "', 
