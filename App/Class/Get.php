@@ -12,10 +12,17 @@ class Get
     static function FileReinvertion()
     {
         $id = $_POST['id'];
-        $token = $_POST['token'];
+        $token = $_GET['token'];
 
         if ($token) {
-            $session = CheckSession($token);
+
+            $_POST['token'] = $token;
+
+            $session = CheckSession();
+
+            if ($session) {
+                print $session;
+            }
         }
 
         return "Xd";
@@ -80,7 +87,6 @@ class Get
                     (?,?,?,?,?)", [$_SERVER['REMOTE_ADDR'], $infoUser['Num_Portafolio'], $token, time(), strtotime("+2 Days")]);
 
                     if ($insert) {
-
                         setcookie("token", $token, strtotime("+20 days"), "/");
                         $status = true;
                     } else {
