@@ -65,6 +65,8 @@ class Get
         $email = $_POST['email'];
         $user = $_POST['user'];
 
+        NewLog("entraste todo bien");
+
         if (!empty($appKey) && !empty($email)) {
             if (CheckAppKey($appKey)) {
                 $infoUser = ExistsUser($email, $user);
