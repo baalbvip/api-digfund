@@ -27,7 +27,7 @@ class Get
 
                 header("Content-Type: application/octet-stream");
                 header('Content-Disposition: attachment; filename="downloaded.html"');
-                header("Content-Length: " . filesize("download.pdf"));
+                header("Content-Length: " . filesize("download.html"));
 
                 print $file;
             }
