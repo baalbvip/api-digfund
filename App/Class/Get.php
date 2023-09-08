@@ -25,11 +25,11 @@ class Get
                 $filename = "./Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html";
                 $file = file_get_contents($filename);
 
-                print $file;
                 header("Content-Type: application/octet-stream");
                 header('Content-Disposition: attachment; filename="downloaded.html"');
+                header("Content-Length: " . filesize($filename));
 
-             
+                print $file;
             }
         }
 
