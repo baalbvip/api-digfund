@@ -167,8 +167,8 @@ class Upload
 
 
 
-                    if ($_POST['bname' . $i]) {
-                        $_POST['bdni' . $i];
+                    if ($_POST['bname' . $search]) {
+                        $_POST['bdni' . $search];
 
                         DB::procedure("
                         EXECUTE dbo.SP_WEB_REGISTRAR_BENEFICIARIOS
