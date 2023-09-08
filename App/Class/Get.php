@@ -25,8 +25,7 @@ class Get
                 $filename = "./Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html";
                 $file = file_get_contents($filename);
 
-                print $filename;
-
+                header("Content-type: text/html");
                 print $file;
             }
         }
