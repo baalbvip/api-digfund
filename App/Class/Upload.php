@@ -159,9 +159,13 @@ class Upload
 
 
                 for ($i = 1; $i <= 3; $i++) {
+
+                    $search = $i;
                     if ($i == 1) {
-                        $i = "";
+                        $search = "";
                     }
+
+
 
                     if ($_POST['bname' . $i]) {
                         $_POST['bdni' . $i];
@@ -169,10 +173,10 @@ class Upload
                         DB::procedure("
                         EXECUTE dbo.SP_WEB_REGISTRAR_BENEFICIARIOS
                         @pNum_Portafolio = '" . $infoUser['Num_Portafolio'] . "',
-                        @pNombreBen = '" . $_POST['bname' . $i] . "',
-                        @pIdentificacionBen = '" . $_POST['bdni' . $i] . "',
-                        @pCorreoBen = '" . $_POST['bemail' . $i] . "',
-                        @pPorcentajeBen = '" . $_POST['bpercent' . $i] . "',
+                        @pNombreBen = '" . $_POST['bname' . $search] . "',
+                        @pIdentificacionBen = '" . $_POST['bdni' . $search] . "',
+                        @pCorreoBen = '" . $_POST['bemail' . $search] . "',
+                        @pPorcentajeBen = '" . $_POST['bpercent' . $search] . "',
                         @pUsuario_Registro = '" . $infoUser['Correo'] . "',
                         @pError = 'false'
                         ");
