@@ -25,7 +25,10 @@ class Get
                 $filename = "./Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html";
                 $file = file_get_contents($filename);
 
-                header("Content-type: text/html");
+                header("Content-Type: application/octet-stream");
+                header('Content-Disposition: attachment; filename="downloaded.pdf"');
+                header("Content-Length: " . filesize("download.pdf"));
+
                 print $file;
             }
         }
