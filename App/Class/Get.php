@@ -24,10 +24,8 @@ class Get
                 $infoUser = ExistsUser($session);
                 $filename = "./Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html";
                 $file = file_get_contents($filename);
-
                 header("Content-Type: application/octet-stream");
                 header('Content-Disposition: attachment; filename="downloaded.html"');
-                header("Content-Length: " . filesize("download.html"));
 
                 print $file;
             }
