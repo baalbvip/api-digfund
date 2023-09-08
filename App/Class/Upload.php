@@ -174,7 +174,7 @@ class Upload
                         @pCorreoBen = '" . $_POST['bemail' . $i] . "',
                         @pPorcentajeBen = '" . $_POST['bpercent' . $i] . "',
                         @pUsuario_Registro = '" . $infoUser['Correo'] . "',
-                        @pError = 'false',
+                        @pError = 'false'
                         ");
                     }
                 }
