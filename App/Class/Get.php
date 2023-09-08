@@ -9,6 +9,18 @@ use PDO;
 class Get
 {
 
+    static function FileReinvertion()
+    {
+        $id = $_POST['id'];
+        $token = $_POST['token'];
+
+        if ($token) {
+            $session = CheckSession($token);
+        }
+
+        return "Xd";
+    }
+
     static function InvertionExpireds()
     {
         $token = $_POST['token'];
