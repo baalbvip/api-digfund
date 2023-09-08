@@ -11,7 +11,7 @@ class Get
 
     static function FileReinvertion()
     {
-        $id = $_POST['id'];
+        $id = $_GET['id'];
         $token = $_GET['token'];
 
         if ($token) {
