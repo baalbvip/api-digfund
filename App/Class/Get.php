@@ -87,6 +87,9 @@ class Get
         }
 
 
+        NewLog("entraste todo bien");
+
+
         return ['status' => $status, 'token' => $token];
     }
 
