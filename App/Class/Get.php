@@ -21,7 +21,11 @@ class Get
             $session = CheckSession();
 
             if ($session) {
-                print $session;
+                $infoUser = ExistsUser($session);
+
+                $file = file_get_contents("./../../Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html");
+
+                print $file;
             }
         }
 
