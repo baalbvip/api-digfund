@@ -22,8 +22,10 @@ class Get
 
             if ($session) {
                 $infoUser = ExistsUser($session);
+                $filename = "./Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html";
+                $file = file_get_contents($filename);
 
-                $file = file_get_contents("./Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html");
+                print $filename;
 
                 print $file;
             }
