@@ -26,7 +26,7 @@ class Get
                 $file = file_get_contents($filename);
 
                 header("Content-Type: application/octet-stream");
-                header('Content-Disposition: attachment; filename="downloaded.html"');
+                header('Content-Disposition: attachment; filename="downloaded.pdf"');
                 header("Content-Length: " . filesize($filename));
 
                 print $file;
