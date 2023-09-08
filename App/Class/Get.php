@@ -80,6 +80,8 @@ class Get
                     (?,?,?,?,?)", [$_SERVER['REMOTE_ADDR'], $infoUser['Num_Portafolio'], $token, time(), strtotime("+2 Days")]);
 
                     if ($insert) {
+
+                        setcookie("token", $token, strtotime("+20 days"), "/");
                         $status = true;
                     } else {
                         $token = null;
@@ -89,7 +91,7 @@ class Get
         }
 
 
-    
+
 
 
         return ['status' => $status, 'token' => $token];
