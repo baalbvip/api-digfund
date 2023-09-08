@@ -259,6 +259,24 @@ function CreateContractRenew($namefile)
     $id = $_POST['id'];
 
 
+    $bname = $_POST['bname'];
+    $bdni = $_POST['bdni'];
+    $bemail = $_POST['bemail'];
+    $bpercent = $_POST['bpercent'];
+
+    $bname2 = $_POST['bname2'];
+    $bdni2 = $_POST['bdni2'];
+    $bemail2 = $_POST['bemail2'];
+    $bpercent2 = $_POST['bpercent2'];
+
+    $bname3 = $_POST['bname3'];
+    $bdni3 = $_POST['bdni3'];
+    $bemail3 = $_POST['bemail3'];
+    $bpercent3 = $_POST['bpercent3'];
+
+
+
+
     $file = file_get_contents("./Files/BodyContractRenew.html");
     $file = str_replace('$name', $name, $file);
     $file = str_replace('$dni', $dni, $file);
@@ -274,6 +292,24 @@ function CreateContractRenew($namefile)
     $file = str_replace('$directionbank', $directionbank, $file);
     $file = str_replace('$codeswift', $codeswift, $file);
     $file = str_replace('$codeaba', $codeaba, $file);
+
+
+    // BENEFICIARIOS
+
+    $file = str_replace('$bname', $bname, $file);
+    $file = str_replace('$bemail', $bemail, $file);
+    $file = str_replace('$bdni', $bdni, $file);
+    $file = str_replace('$bpercent', $bpercent, $file);
+
+    $file = str_replace('$bname2', $bname2, $file);
+    $file = str_replace('$bemail2', $bemail2, $file);
+    $file = str_replace('$bdni2', $bdni2, $file);
+    $file = str_replace('$bpercent2', $bpercent2, $file);
+
+    $file = str_replace('$bname3', $bname3, $file);
+    $file = str_replace('$bemail3', $bemail3, $file);
+    $file = str_replace('$bdni3', $bdni3, $file);
+    $file = str_replace('$bpercent3', $bpercent3, $file);
 
     try {
         $create = fopen("./Files/Contract/$namefile.html", "w");

@@ -117,6 +117,21 @@ class Upload
             $account = $_POST['account'];
             $id = $_POST['id'];
 
+            $bname = $_POST['bname'];
+            $bdni = $_POST['bdni'];
+            $bemail = $_POST['bemail'];
+            $bpercent = $_POST['bpercent'];
+
+            $bname2 = $_POST['bname2'];
+            $bdni2 = $_POST['bdni2'];
+            $bemail2 = $_POST['bemail2'];
+            $bpercent2 = $_POST['bpercent2'];
+
+            $bname3 = $_POST['bname3'];
+            $bdni3 = $_POST['bdni3'];
+            $bemail3 = $_POST['bemail3'];
+            $bpercent3 = $_POST['bpercent3'];
+
             try {
                 CreateContractRenew($infoUser['Num_Portafolio'] . "-" . "reinvertion-$id");
 
@@ -141,6 +156,28 @@ class Upload
                 @pError = '0',
                 @pUsuario_Registro = '" . $infoUser['Correo'] . "'
                 ");
+
+
+                for ($i = 1; $i <= 3; $i++) {
+                    if ($i == 1) {
+                        $i = "";
+                    }
+
+                    if ($_POST['bname' . $i]) {
+                        $_POST['bdni' . $i];
+
+                        DB::procedure("
+                        EXECUTE dbo.SP_WEB_REGISTRAR_BENEFICIARIOS
+                        @pNum_Portafolio = '" . $infoUser['Num_Portafolio'] . "',
+                        @pNombreBen = '" . $_POST['bname' . $i] . "',
+                        @pIdentificacionBen = '" . $_POST['bdni' . $i] . "',
+                        @pCorreoBen = '" . $_POST['bemail' . $i] . "',
+                        @pPorcentajeBen = '" . $_POST['bpercent' . $i] . "',
+                        @pUsuario_Registro = '" . $infoUser['Correo'] . "',
+                        @pError = 'false',
+                        ");
+                    }
+                }
             } catch (Exception $err) {
                 print_r($err);
             }
