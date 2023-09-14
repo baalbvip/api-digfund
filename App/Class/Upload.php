@@ -116,6 +116,7 @@ class Upload
             $codeaba = $_POST['codeaba'];
             $account = $_POST['account'];
             $id = $_POST['id'];
+            $usa = $_POST['usa'];
 
             $bname = $_POST['bname'];
             $bdni = $_POST['bdni'];
