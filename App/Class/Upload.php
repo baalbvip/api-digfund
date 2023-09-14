@@ -6,6 +6,8 @@ use Connection\DB;
 use Exception;
 use PDO;
 
+require("./Functions/SendEmail.php");
+
 error_reporting(E_ALL);
 
 class Upload
@@ -134,7 +136,7 @@ class Upload
             $bpercent3 = $_POST['bpercent3'];
 
             try {
-                CreateContractRenew($infoUser['Num_Portafolio'] . "-" . "reinvertion-$id");
+                $fileCreate = CreateContractRenew($infoUser['Num_Portafolio'] . "-" . "reinvertion-$id");
 
                 DB::procedure("
                 EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
@@ -190,6 +192,14 @@ class Upload
 
 
             $status = true;
+
+            if ($status) {
+                if ($fileCreate['status']) {
+                    $source = file_get_contents($fileCreate['route']);
+
+                    sendEmail("Has hecho una reinversion", $source, $email);
+                }
+            }
         }
 
 

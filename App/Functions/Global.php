@@ -315,7 +315,11 @@ function CreateContractRenew($namefile)
         $create = fopen("./Files/Contract/$namefile.html", "w");
         fwrite($create, $file);
         fclose($create);
+        $response = ['status' => true, "route" => "./Files/Contract/$namefile.html"];
     } catch (Exception $err) {
         print_r($err);
+        $response = ['status' => false];
     }
+
+    return $response;
 }
