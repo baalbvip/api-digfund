@@ -6,6 +6,8 @@ use Connection\DB;
 use Exception;
 use PDO;
 
+require("./Functions/SendEmail.php");
+
 class Get
 {
 
