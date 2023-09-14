@@ -195,9 +195,9 @@ class Upload
 
             if ($status) {
                 if ($fileCreate['status']) {
-                    $source = file_get_contents($fileCreate['route']);
-
-                    sendEmail("Has hecho una reinversion", $source, $email);
+                    $source = file_get_contents("./Files/notificacion.html");
+                    $newText = str_replace('$id', $id, $source);
+                    sendEmail("Has hecho una reinversion", $newText, $email);
                 }
             }
         }
