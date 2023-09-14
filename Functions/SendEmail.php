@@ -34,8 +34,6 @@ function sendEmail($affair, $body, $to)
 
         // Enviar el correo electrónico
         $mail->send();
-        echo 'Correo electrónico enviado correctamente';
     } catch (Exception $e) {
-        echo "Error al enviar el correo electrónico: {$mail->ErrorInfo}";
     }
 }
