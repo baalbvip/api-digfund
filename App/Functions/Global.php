@@ -256,6 +256,8 @@ function CreateContractRenew($namefile)
     $codeswift = $_POST['codeswift'];
     $codeaba = $_POST['codeaba'];
     $account = $_POST['account'];
+    $phone = $_POST['phone'];
+    $usa = $_POST['usa'];
     $id = $_POST['id'];
 
 
@@ -292,6 +294,9 @@ function CreateContractRenew($namefile)
     $file = str_replace('$directionbank', $directionbank, $file);
     $file = str_replace('$codeswift', $codeswift, $file);
     $file = str_replace('$codeaba', $codeaba, $file);
+    $file = str_replace('$account', $account, $file);
+    $file = str_replace('$phone', $phone, $file);
+
 
 
     // BENEFICIARIOS
@@ -310,6 +315,14 @@ function CreateContractRenew($namefile)
     $file = str_replace('$bemail3', $bemail3, $file);
     $file = str_replace('$bdni3', $bdni3, $file);
     $file = str_replace('$bpercent3', $bpercent3, $file);
+
+    if ($usa == "true") {
+        $file = str_replace('$yesusa', "x", $file);
+        $file = str_replace('$nousa', "", $file);
+    } else {
+        $file = str_replace('$yesusa', "", $file);
+        $file = str_replace('$nousa', "x", $file);
+    }
 
     try {
         $create = fopen("./Files/Contract/$namefile.html", "w");
