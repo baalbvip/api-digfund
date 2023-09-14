@@ -318,9 +318,9 @@ function CreateContractRenew($namefile)
 
     if ($usa == "true") {
         $file = str_replace('$yesusa', "x", $file);
-        $file = str_replace('$nousa', "", $file);
+        $file = str_replace('$nousa', "__", $file);
     } else {
-        $file = str_replace('$yesusa', "", $file);
+        $file = str_replace('$yesusa', "__", $file);
         $file = str_replace('$nousa', "x", $file);
     }
 
