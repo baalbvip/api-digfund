@@ -24,7 +24,7 @@ class Get
 
             if ($session) {
                 $infoUser = ExistsUser($session);
-                $filename = "./Files/Contract/" . $filename;
+                $filename = "./Files/Contract/" . $filename . ".html";
                 $file = file_get_contents($filename);
 
                 header("Content-Type: application/octet-stream");
