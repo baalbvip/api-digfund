@@ -13,8 +13,8 @@ class Get
 
     static function FileReinvertion()
     {
-        $id = $_GET['id'];
         $token = $_GET['token'];
+        $filename = $_GET['filename'];
 
         if ($token) {
 
@@ -24,7 +24,7 @@ class Get
 
             if ($session) {
                 $infoUser = ExistsUser($session);
-                $filename = "./Files/Contract/" . $infoUser['Num_Portafolio'] . "-reinvertion-" . $id . ".html";
+                $filename = "./Files/Contract/" . $filename;
                 $file = file_get_contents($filename);
 
                 header("Content-Type: application/octet-stream");

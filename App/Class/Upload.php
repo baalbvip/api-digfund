@@ -136,7 +136,8 @@ class Upload
             $bpercent3 = $_POST['bpercent3'];
 
             try {
-                $fileCreate = CreateContractRenew($infoUser['Num_Portafolio'] . "-" . "reinvertion-$id-hash-" . md5(time()));
+                $filename = $infoUser['Num_Portafolio'] . "-" . "reinvertion-$id-hash-" . md5(time());
+                $fileCreate = CreateContractRenew($filename);
 
                 DB::procedure("
                 EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
@@ -204,6 +205,6 @@ class Upload
         }
 
 
-        return ['status' => $status];
+        return ['status' => $status, 'filename' => $filename];
     }
 }
