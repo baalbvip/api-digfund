@@ -302,18 +302,18 @@ function CreateContractRenew($namefile)
     // BENEFICIARIOS
 
     $replacements = [
-        '$bname' => $bname,
-        '$bemail' => $bemail,
-        '$bdni' => $bdni,
-        '$bpercent' => $bpercent,
-        '$bname2' => $bname2,
-        '$bemail2' => $bemail2,
-        '$bdni2' => $bdni2,
-        '$bpercent2' => $bpercent2,
-        '$bname3' => $bname3,
-        '$bemail3' => $bemail3,
-        '$bdni3' => $bdni3,
-        '$bpercent3' => $bpercent3,
+        '{bname}' => $bname,
+        '{bemail}' => $bemail,
+        '{bdni}' => $bdni,
+        '{bpercent}' => $bpercent,
+        '{bname2}' => $bname2,
+        '{bemail2}' => $bemail2,
+        '{bdni2}' => $bdni2,
+        '{bpercent2}' => $bpercent2,
+        '{bname3}' => $bname3,
+        '{bemail3}' => $bemail3,
+        '{bdni3}' => $bdni3,
+        '{bpercent3}' => $bpercent3,
     ];
 
     // Iterar a través del arreglo de reemplazos y realizar los reemplazos
