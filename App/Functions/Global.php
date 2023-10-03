@@ -301,20 +301,31 @@ function CreateContractRenew($namefile)
 
     // BENEFICIARIOS
 
-    $file = str_replace('$bname', $bname, $file);
-    $file = str_replace('$bemail', $bemail, $file);
-    $file = str_replace('$bdni', $bdni, $file);
-    $file = str_replace('$bpercent', $bpercent, $file);
+    $replacements = [
+        '$bname' => $bname,
+        '$bemail' => $bemail,
+        '$bdni' => $bdni,
+        '$bpercent' => $bpercent,
+        '$bname2' => $bname2,
+        '$bemail2' => $bemail2,
+        '$bdni2' => $bdni2,
+        '$bpercent2' => $bpercent2,
+        '$bname3' => $bname3,
+        '$bemail3' => $bemail3,
+        '$bdni3' => $bdni3,
+        '$bpercent3' => $bpercent3,
+    ];
 
-    $file = str_replace('$bname2', $bname2, $file);
-    $file = str_replace('$bemail2', $bemail2, $file);
-    $file = str_replace('$bdni2', $bdni2, $file);
-    $file = str_replace('$bpercent2', $bpercent2, $file);
-
-    $file = str_replace('$bname3', $bname3, $file);
-    $file = str_replace('$bemail3', $bemail3, $file);
-    $file = str_replace('$bdni3', $bdni3, $file);
-    $file = str_replace('$bpercent3', $bpercent3, $file);
+    // Iterar a través del arreglo de reemplazos y realizar los reemplazos
+    foreach ($replacements as $key => $value) {
+        // Verificar si el valor es distinto de NULL o cadena vacía antes de reemplazar
+        if ($value !== null && $value !== '') {
+            $file = str_replace($key, $value, $file);
+        } else {
+            // Si el valor es NULL o cadena vacía, reemplazarlo con "No Aplica"
+            $file = str_replace($key, "No Aplica", $file);
+        }
+    }
 
     if ($usa == "true") {
         $file = str_replace('$yesusa', "x", $file);
