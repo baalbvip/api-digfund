@@ -136,7 +136,7 @@ class Upload
             $bpercent3 = $_POST['bpercent3'];
 
             try {
-                $fileCreate = CreateContractRenew($infoUser['Num_Portafolio'] . "-" . "reinvertion-$id");
+                $fileCreate = CreateContractRenew($infoUser['Num_Portafolio'] . "-" . "reinvertion-$id-hash-" . md5(time()));
 
                 DB::procedure("
                 EXECUTE dbo.SP_WEB_REGISTRAR_CONTRATO 
@@ -197,6 +197,7 @@ class Upload
                 if ($fileCreate['status']) {
                     $source = file_get_contents("./Files/notificacion.html");
                     $newText = str_replace('$id', $id, $source);
+                    $newText = str_replace('$link', "https://api.dig-fund.com/api/get/filereinvertion?id=$id&token=" . $_POST['token'], $newText);
                     sendEmail("Has hecho una reinversion", $newText, $email);
                 }
             }
