@@ -138,9 +138,9 @@ function CreateUser($params)
 
 function NewLog($text)
 {
-    $file = fopen("./Logs/log.txt", "a");
-    fwrite($file, $text . "\n");
-    fclose($file);
+    //$file = fopen("./Logs/log.txt", "a");
+    //fwrite($file, $text . "\n");
+    //fclose($file);
 }
 
 function CreateOrder($user, $params)
